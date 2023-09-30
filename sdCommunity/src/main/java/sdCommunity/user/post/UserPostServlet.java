@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -41,6 +43,7 @@ public class UserPostServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("Start posting to database");
 		HttpSession session = request.getSession();
+	
 		int id=(Integer) session.getAttribute("uid");
 		String heading= request.getParameter("heading");
 		String text = request.getParameter("text");
@@ -78,6 +81,8 @@ public class UserPostServlet extends HttpServlet {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
+		
 	}
 
 }

@@ -11,7 +11,7 @@
 	String fname=(String)session.getAttribute("fname"); 
 	String lname=(String)session.getAttribute("lname"); 
 	String email=(String)session.getAttribute("email");
-	Integer num=(Integer)session.getAttribute("num"); 	
+	long num=(Long)session.getAttribute("num");	
 %>
 <style type="text/css">
 	input,label,textarea{

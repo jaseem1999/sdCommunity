@@ -1,0 +1,5 @@
+package sdCommunity.user.post;
+
+public class DAOPost {
+
+}

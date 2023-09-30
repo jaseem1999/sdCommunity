@@ -42,5 +42,14 @@
     <url-pattern>/postServlet</url-pattern>
 </servlet-mapping>
   
+ <servlet>
+    <servlet-name>PostImage</servlet-name>
+    <servlet-class>sdCommunity.user.post.postImage</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>PostImage</servlet-name>
+    <url-pattern>/poimg</url-pattern>
+</servlet-mapping>
+  
   
 </web-app>

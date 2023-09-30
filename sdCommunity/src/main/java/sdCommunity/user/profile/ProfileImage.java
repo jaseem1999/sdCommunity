@@ -35,7 +35,7 @@ public class ProfileImage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Hello");
+		
 		try {
             // Assuming you have a database connection
 			Class.forName("com.mysql.cj.jdbc.Driver");

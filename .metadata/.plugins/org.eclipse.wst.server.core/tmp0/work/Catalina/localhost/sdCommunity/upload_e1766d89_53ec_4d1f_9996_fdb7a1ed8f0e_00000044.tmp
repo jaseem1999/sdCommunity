@@ -1,0 +1,11 @@
+try {
+            String inputImagePath = "input.jpg";
+            String outputImagePath = "output.jpg";
+            int scaledWidth = 300;
+            int scaledHeight = 200;
+
+            resizeImage(inputImagePath, outputImagePath, scaledWidth, scaledHeight);
+            System.out.println("Image resized successfully.");
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
