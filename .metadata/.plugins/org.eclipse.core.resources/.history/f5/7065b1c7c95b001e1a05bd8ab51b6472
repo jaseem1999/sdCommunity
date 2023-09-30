@@ -1,0 +1,29 @@
+@charset "ISO-8859-1";
+.bdy{
+ 	background-color: black;
+	color: white;
+ }
+    
+#signBConnection{
+ 	height: auto;
+    background-image: url("./img/connectionpng.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+ }
+#ctrForm{
+ 	background-color: transparent; 
+ 	width: 350px; 
+ 	margin: 20px; 
+ 	border: 1px solid #f0f8ff; 
+ }
+.alert{
+	font-family: Times, Times New Roman, serif;
+}
+.error{
+	color: red;
+}
+#failedAlert{
+	position: relative;
+    top: 40%;
+}

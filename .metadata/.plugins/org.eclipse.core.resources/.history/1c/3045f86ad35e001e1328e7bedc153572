@@ -1,0 +1,130 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    .post-form {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    input, textarea, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .format-options {
+        margin-bottom: 10px;
+    }
+    .post-display {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+    }
+</style>
+</head>
+<body>
+    <div class="post-form">
+        <h2>Create a Social Media Post</h2>
+        <form>
+            <label for="image">Upload Image:</label>
+            <input type="file" id="image" name="image" accept="image/*"><br>
+
+            <label for="link">Link:</label>
+            <input type="url" id="link" name="link"><br>
+
+            <label for="text">Post Text:</label>
+            <textarea id="text" name="text" rows="5"></textarea><br>
+
+            <div class="format-options">
+                <button type="button" onclick="makeBold()">Bold</button>
+                <button type="button" onclick="makeItalic()">Italic</button>
+            </div>
+
+            <label for="code">Programming Code:</label>
+            <textarea id="code" name="code" rows="5"></textarea><br>
+
+            <button type="submit">Post</button>
+        </form>
+    </div>
+
+    <div class="post-display" id="postDisplay">
+        <h2>Posted Content</h2>
+        <div id="displayContent">
+        	<p id=textShow></p>
+        	<a href="" id="showLink"></a>
+        	<img alt="" src="" id="imgShow">
+        	<pre id="showCode"></pre>
+        </div>
+    </div>
+
+    <script>
+        function makeBold() {
+            var textarea = document.getElementById('text');
+            var selectedText = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd);
+            var beforeText = textarea.value.substring(0, textarea.selectionStart);
+            var afterText = textarea.value.substring(textarea.selectionEnd);
+            textarea.value = beforeText + '<b>' + selectedText + '</b>' + afterText;
+        }
+
+        function makeItalic() {
+            var textarea = document.getElementById('text');
+            var selectedText = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd);
+            var beforeText = textarea.value.substring(0, textarea.selectionStart);
+            var afterText = textarea.value.substring(textarea.selectionEnd);
+            textarea.value = beforeText + '<i>' + selectedText + '</i>' + afterText;
+        }
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            var image = document.getElementById('image').value;
+            var link = document.getElementById('link').value;
+            var text = document.getElementById('text').value;
+            var code = document.getElementById('code').value;
+
+            // Display the content
+            
+            if (image) {
+            	document.getElementById("imgShow").src = image;
+            }
+            if (link) {
+            	document.getElementById("showLink").href = link;
+            }
+            if (text) {
+            	 document.getElementById("textShow").innerHTML = text;
+            }
+            if (code) {
+                displayContent.innerHTML += `<pre><code>${code}</code></pre>`;
+            }
+
+            // Scroll to the display section
+            document.getElementById('postDisplay').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

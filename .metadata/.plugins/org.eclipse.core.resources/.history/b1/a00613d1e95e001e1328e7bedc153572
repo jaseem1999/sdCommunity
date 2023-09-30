@@ -1,0 +1,72 @@
+package sdCommunity.user.post;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
+import com.mysql.cj.Session;
+
+import sdCommunity.conn.Conn;
+
+/**
+ * Servlet implementation class UserPostServlet
+ */
+@MultipartConfig
+@WebServlet("/UserPostServlet")
+public class UserPostServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UserPostServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("Start posting to database");
+		HttpSession session = request.getSession();
+		int id=(Integer) session.getAttribute("uid");
+		String heading= request.getParameter("heading");
+		String text = request.getParameter("text");
+		String link= request.getParameter("link");
+		String code= request.getParameter("code");
+		
+		InputStream inputStream = null;
+        Part part = request.getPart("image");
+		
+		System.out.println(id);
+		System.out.println(heading);
+		System.out.println(text);
+		System.out.println(link);
+		System.out.println(code);
+		Conn con= new Conn();
+		Connection conn =con.connection;
+		
+		
+		try {
+			String sql = "INSERT INTO userPost (uid, heading, image, link, post, codes) VALUES (? ,? ,? ,? ,? , ?)";
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+}

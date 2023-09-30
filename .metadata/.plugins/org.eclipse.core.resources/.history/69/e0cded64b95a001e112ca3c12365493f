@@ -1,0 +1,12 @@
+@charset "ISO-8859-1";
+.bdy{
+ 	background-color: black;
+    color: white;
+ }
+
+
+.form-text{
+		margin-left: 20px;
+		margin-right: 10px;
+}
+	

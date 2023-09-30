@@ -1,0 +1,131 @@
+<%@page import="java.util.Base64"%>
+<%@page import="java.io.ByteArrayOutputStream"%>
+<%@page import="java.awt.image.BufferedImage"%>
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="java.io.ByteArrayInputStream"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="sdCommunity.user.login.userDTO"%>
+<%@page import="sdCommunity.user.login.userDAO"%>
+<%@page import="java.sql.Blob"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+String email =request.getParameter("email");
+String pass =request.getParameter("password");
+userDAO user= new userDAO();
+int i =user.login(email, pass);
+userDTO dto = new userDTO();
+int sid =0;
+String sfname=null;
+String slname=null;
+String smail=null;
+String spass= null;
+int snum=0;
+
+int spid=0;
+byte[] simg = null;
+String scompany=null;
+String sgithub = null;
+String slinkedin = null;
+String snational = null;
+String sgender = null;
+String swebsite = null;
+int sfpuid = 0;
+
+try {
+	
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sdCommunity","root", "Love1999@MySQL");
+	PreparedStatement stm =con.prepareStatement("select * from user where  email='"+email+"' and password='"+pass+"';");
+	ResultSet rs=stm.executeQuery();
+	while(rs.next()) {
+		sid = rs.getInt(1);
+		sfname=rs.getString(2);
+		slname=rs.getString(3);
+		smail=rs.getString(4);
+		spass=rs.getString(5);
+		snum=rs.getInt(6);
+		
+	}
+	
+	
+	
+	
+	
+} catch (Exception e) {
+	
+}
+
+
+
+if (i > 0) {
+	try{
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sdCommunity","root", "Love1999@MySQL");
+	
+	PreparedStatement stm =con.prepareStatement("select * from user_info where uid="+sid+";");
+	ResultSet rs=stm.executeQuery();
+	while(rs.next()) {
+		spid = rs.getInt(1);
+		Blob imgBlob = rs.getBlob(2);
+        simg = imgBlob.getBytes(1, (int) imgBlob.length());
+		scompany=rs.getString(3);
+		sgithub=rs.getString(4);
+		slinkedin=rs.getString(5);
+		snational=rs.getString(6);
+		sgender=rs.getString(7);
+		sfpuid=rs.getInt(8);
+		
+	}
+	}catch(Exception e){
+		
+	}
+	
+	try {
+	   
+		ByteArrayInputStream bis = new ByteArrayInputStream(simg);
+	    BufferedImage bImage = ImageIO.read(bis);
+	    bis.close();
+	    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	    ImageIO.write(bImage, "jpg", bos);
+	    byte[] imageBytes = bos.toByteArray();
+	    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+	    session.setAttribute("base64Image", base64Image);
+		
+
+	    // Rest of your code...
+	} catch (Exception e) {
+	    e.printStackTrace(); // Add this line for debugging
+	};
+	session.setAttribute("uid", sid);
+	session.setAttribute("email", smail);
+	session.setAttribute("fname", sfname);
+	session.setAttribute("lname", slname);
+	session.setAttribute("num",snum);
+	session.setAttribute("pid", spid);
+	session.setAttribute("company", scompany);
+	session.setAttribute("github", sgithub);
+	session.setAttribute("linkedin", slinkedin);
+	session.setAttribute("nation", snational);
+	session.setAttribute("gender", sgender);
+	
+    response.sendRedirect("UserHome.jsp");
+} else {
+    response.sendRedirect("Login.jsp?message=Failed");
+}
+
+%>
+
+
+</body>
+</html>
