@@ -1,0 +1,18 @@
+package sdCommunity.user.post;
+
+public class userDTO {
+	private int uid;
+	private String fname;
+	private String lname;
+	private String company;
+	private String college;
+	private String position;
+	private String github;
+	private String linkedin;
+	private String website;
+	private String email;
+	private long num;
+	private String about;
+	private String nationality;
+	private String gender;
+}

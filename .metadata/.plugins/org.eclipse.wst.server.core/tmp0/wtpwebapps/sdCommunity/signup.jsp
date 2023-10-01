@@ -74,7 +74,7 @@
 			    		<label for="exampleInputLname" class="form-label">Last Name</label>
 			    		<input type="text" class="form-control" id="exampleInputlname" name="lname" ">
 			  		</div>
-					 <div id="center"><button type="submit" class="btn btn-primary" >Sign Up</button></div>
+					 <div id="center"><button type="submit" class="btn btn-success" >Sign Up</button> <a class="btn btn-primary" href="Login.jsp">Login</a> </div>
 					</form>
 			    
 			    </div>

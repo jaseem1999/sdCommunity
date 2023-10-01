@@ -50,6 +50,15 @@
     <servlet-name>PostImage</servlet-name>
     <url-pattern>/poimg</url-pattern>
 </servlet-mapping>
+
+<servlet>
+    <servlet-name>PostView</servlet-name>
+    <servlet-class>sdCommunity.user.post.ViewPostServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>PostView</servlet-name>
+    <url-pattern>/viewPost</url-pattern>
+</servlet-mapping>
   
   
 </web-app>

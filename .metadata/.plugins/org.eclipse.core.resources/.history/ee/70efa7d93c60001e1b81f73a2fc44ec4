@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+
+<%
+String suid= request.getParameter("id");
+%>
+<meta charset="ISO-8859-1">
+<title><%=suid %></title>
+</head>
+<body>
+
+</body>
+</html>

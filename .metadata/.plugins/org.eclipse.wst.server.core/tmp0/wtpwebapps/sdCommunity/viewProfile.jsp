@@ -365,7 +365,7 @@ a{
 			    	
 			      	<div class="" style="color: white; max-width: 100%; margin-left: 20px; margin-top: 10px;" id="center">
 						  <img src="poimg?id=<%=po.getPostId()%>" style="width : 100%; height: 200px;" alt="...">
-						  <img style="width: 50px; height: 50px; border-radius: 50%; margin-top: 0px; margin-left: 10px; " alt="" src="image?id=<%=po.getUid()%>">
+						  <img style="width: 50px; height: 50px; border-radius: 50%; margin-top: 5px; margin-left: 10px;border: 2px solid; " alt="" src="image?id=<%=po.getUid()%>">
 						  <div class="card-body">
 							    <h5 class="" style="text-align: center; margin: 10px;"><%=po.getHeading()%></h5>   	
 							    	<p class="card-text" style="margin: 30px;"><%=po.getPost()%></p>
