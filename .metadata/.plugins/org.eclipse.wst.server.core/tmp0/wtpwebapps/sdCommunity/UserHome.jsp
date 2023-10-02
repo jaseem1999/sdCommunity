@@ -112,7 +112,7 @@
 		  <li class="nav-item">
 		    <%
 		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Chat</a>");
+		  		out.print("<a class='nav-link' href='userChat.jsp'>Chat</a>");
 		  	}else{
 		  		out.print("");
 		  	}

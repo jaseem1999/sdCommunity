@@ -1,0 +1,5 @@
+package sdCommunity.user.chat;
+
+public class ChatEndpoint {
+
+}

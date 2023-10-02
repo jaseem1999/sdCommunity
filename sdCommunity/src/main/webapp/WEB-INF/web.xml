@@ -59,6 +59,27 @@
     <servlet-name>PostView</servlet-name>
     <url-pattern>/viewPost</url-pattern>
 </servlet-mapping>
+
+<servlet>
+    <servlet-name>comment</servlet-name>
+    <servlet-class>sdCommunity.user.comment.CommentServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>comment</servlet-name>
+    <url-pattern>/cmt</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>CommentData</servlet-name>
+    <servlet-class>sdCommunity.user.comment.CommentDataServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>CommentData</servlet-name>
+    <url-pattern>/CommentDataServt</url-pattern>
+</servlet-mapping>
+
+	
   
   
 </web-app>

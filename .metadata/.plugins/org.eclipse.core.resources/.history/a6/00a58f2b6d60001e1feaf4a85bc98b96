@@ -1,0 +1,90 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+
+<%  
+    Integer id =(Integer)session.getAttribute("uid");
+    String fname=(String)session.getAttribute("fname"); 
+
+    List<String> chatList = (List<String>) session.getAttribute("chatList");
+    if (chatList == null) {
+        chatList = new ArrayList<>();
+        session.setAttribute("chatList", chatList);
+    }
+
+    String message = request.getParameter("message");
+    if (message != null && !message.isEmpty()) {
+        chatList.add(fname + ": " + message);
+    }
+%>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Live Chat</title>
+    <style>
+        /* Add your CSS styles here */
+        #chat {
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+
+        #chat ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #chat li {
+            margin-bottom: 5px;
+        }
+    </style>
+    <script>
+        function sendMessage() {
+            var message = document.getElementById('message').value;
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById('message').value = '';
+                }
+            }
+
+            xmlhttp.open('POST', 'userChat.jsp', true);
+            xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xmlhttp.send('message=' + message);
+        }
+
+        function updateChat() {
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById('chat').innerHTML = xmlhttp.responseText;
+                    setTimeout(updateChat, 1000); // Update every second
+                }
+            }
+
+            xmlhttp.open('GET', 'userChat.jsp', true);
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body onload="updateChat()">
+    <h1>Welcome, <%= fname %>!</h1>
+    <div id="chat">
+        <ul>
+            <%
+                for (String msg : chatList) {
+                    out.println("<li>" + msg + "</li>");
+                }
+            %>
+        </ul>
+    </div>
+    <form onsubmit="sendMessage(); return false;">
+        <input type="text" id="message" style="width: 80%;" />
+        <input type="submit" value="Send" />
+    </form>
+</body>
+</html>

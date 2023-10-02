@@ -83,6 +83,22 @@ String spid= request.getParameter("id");
 .copyBtn:hover{
 	background: green;
 }
+.cmtShow{
+	 margin-bottom: 30px;
+	margin-left: 80px;
+	width: 85%;
+	min-height: 100px;
+	background: #00000078;
+	border: 1px solid #fffefe8a;
+	color: white;
+}
+.Cmntheading{
+	color: white;
+	width: 100%;
+	height: 35px;
+	border :1px solid #fffefe8a;
+}
+
 </style>
 
 
@@ -90,12 +106,7 @@ String spid= request.getParameter("id");
 <body style="background-color: black">
 
 	<ul class="nav justify-content-end " >
-			<li class="nav-item">
-			<div class="" style="color: white; max-width: 100%; margin-left: 20px; margin-top: 5px;" id="showPost">
-				<input type="text" id="searchInput" placeholder="Enter search query">
-				<button class="btn btn-primary"	 onclick="search()">Search</button>
-			</div>
-			</li>
+			
 			<li class="nav-item">
 		    	<a class='nav-link' href='UserHome.jsp'>Home</a>
 			</li>
@@ -304,7 +315,32 @@ String spid= request.getParameter("id");
 							    	 
 						  </div>
 					</div>
+				
 					<hr style="color: white; border: 3px solid;">
+					 <div class="cmtShow" id="cmt">
+						<p class="Cmntheading">Comment</p>
+						<div class="row">
+    							<%
+    								int postId=po.getPostId();
+    								session.setAttribute("postId", postId);
+    							%>
+    							<div class="col-sm-11">
+									
+									<p style="margin-left: 10px; margin-right: 5px" id="commentsDiv">
+									
+									</p>
+									
+									
+    							</div>
+    				
+  						</div>
+						
+					 	<form  id="commentForm">
+							    <input type="text" class="form-control" id="postcmt" name="postcmt" placeholder="Enter comment" style="width: 90%; margin-left: 10px;">
+							    <input type="button" class="btn btn-secondary" value="Comment" onclick="submitComment()" style="margin: 10px;">
+						</form>
+					 	
+					 </div>
 					 <%} %>
 			    </div>
 			    </div>
@@ -321,6 +357,171 @@ function copyToClipboard() {
     window.getSelection().removeAllRanges();
     alert("Code copied to clipboard");
 }
+
+function submitComment() {
+    var comment = document.getElementById("postcmt").value;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "cmt", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Comment was successfully submitted
+                // Update the page as needed (e.g., display a success message)
+                document.getElementById("postcmt").value = ""; // Clear the input field
+            } else {
+                // There was an error in the request
+                console.error(xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send("postcmt=" + encodeURIComponent(comment));
+}
+
+function fetchCommentData() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'CommentDataServlet', true);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var commentsDiv = document.getElementById('commentsDiv');
+                var imageElement = document.getElementById('showImageOf_comt_uid');
+
+                // Clear previous content
+                commentsDiv.innerHTML = "";
+
+                // Loop through the comments data and display them
+                data.comments.forEach(function(commentEntry) {
+                    var parts = commentEntry.split('(UID:');
+                    if (parts.length > 1) {
+                        var uid = parts[1].slice(0, -1);
+                        var id = uid.replace(/\s/g, '');
+
+                        // Create and append the image element first
+                        var imgElement = document.createElement('img');
+                        imgElement.style = "width: 50px; height: 50px; border-radius: 50%; margin-top: 0px; margin-left: 10px;";
+                        imgElement.alt = "";
+                        imgElement.src = "image?id=" + id;
+                        commentsDiv.appendChild(imgElement);
+
+                        // Add your provided HTML code
+                        var htmlCode = `
+                            <a class="btn btn-success btnn" aria-current="page" href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </a>
+                            </div>
+                            <div class="col" style="height: 40px;">
+                                <span style="background-color: lightgreen;padding: 10px; width: 60px; height: 70px;">19</span>
+                        `;
+
+                        // Add the HTML code before the <hr> element
+                        commentsDiv.insertAdjacentHTML('beforeend', htmlCode);
+
+                        // Create and append the <hr> element
+                        var hrElement = document.createElement('hr');
+                        commentsDiv.appendChild(hrElement);
+                    }
+                });
+
+                setTimeout(fetchCommentData, 3000); // Poll every 3 seconds
+            } else {
+                console.error(xhr.responseText);
+                setTimeout(fetchCommentData, 3000); // Retry after 3 seconds in case of error
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+fetchCommentData(); // Start fetching comment data
+function fetchCommentData() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'CommentDataServlet', true);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var commentsDiv = document.getElementById('commentsDiv');
+                var imageElement = document.getElementById('showImageOf_comt_uid');
+
+                // Clear previous content
+                commentsDiv.innerHTML = "";
+
+                // Loop through the comments data and display them
+                data.comments.forEach(function(commentEntry) {
+                    var parts = commentEntry.split('(UID:');
+                    if (parts.length > 1) {
+                        var uid = parts[1].slice(0, -1);
+                        var id = uid.replace(/\s/g, '');
+
+                        // Create and append the image element first
+                        var imgElement = document.createElement('img');
+                        imgElement.style = "width: 50px; height: 50px; border-radius: 50%; margin-top: 0px; margin-left: 10px;";
+                        imgElement.alt = "";
+                        imgElement.src = "image?id=" + id;
+                        commentsDiv.appendChild(imgElement);
+
+                        // Create and append the <a> element
+                        var aElement = document.createElement('a');
+                        aElement.classList.add("btn", "btn-success", "btnn");
+                        aElement.setAttribute("aria-current", "page");
+                        aElement.href = "";
+
+                        // Create and append the SVG element
+                        var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                        svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+                        svgElement.setAttribute("width", "16");
+                        svgElement.setAttribute("height", "16");
+                        svgElement.setAttribute("fill", "currentColor");
+                        svgElement.classList.add("bi", "bi-check2");
+                        svgElement.setAttribute("viewBox", "0 0 16 16");
+
+                        var pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                        pathElement.setAttribute("d", "M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z");
+
+                        svgElement.appendChild(pathElement);
+                        aElement.appendChild(svgElement);
+                        commentsDiv.appendChild(aElement);
+
+                        // Create and append the <span> element
+                        var spanElement = document.createElement('span');
+                        spanElement.style = "background-color: lightgreen; padding: 10px; width: 60px; height: 70px;";
+                        spanElement.textContent = "19";
+                        commentsDiv.appendChild(spanElement);
+
+                        // Create and append the <p> element
+                        var commentElement = document.createElement('p');
+                        commentElement.textContent = parts[0];
+                        commentsDiv.appendChild(commentElement);
+
+                        // Create and append the <hr> element
+                        var hrElement = document.createElement('hr');
+                        commentsDiv.appendChild(hrElement);
+                    }
+                });
+
+                setTimeout(fetchCommentData, 3000); // Poll every 3 seconds
+            } else {
+                console.error(xhr.responseText);
+                setTimeout(fetchCommentData, 3000); // Retry after 3 seconds in case of error
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+fetchCommentData(); // Start fetching comment data
+
+
 
 </script>
 			    
