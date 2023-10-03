@@ -1,0 +1,69 @@
+package sdCommunity.user.post;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import sdCommunity.conn.Conn;
+
+@WebServlet("/PostLike")
+public class PostLike extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int postId;
+        int uid;
+
+        try {
+            postId = Integer.parseInt(request.getParameter("postId"));
+            uid = Integer.parseInt(request.getParameter("uid"));
+        } catch (NumberFormatException e) {
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("Invalid parameters. Please provide numeric postId and uid.");
+            return;
+        }
+
+        try  {
+        	Conn con = new Conn();
+            Connection conn = con.connection;
+
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM postLike WHERE postId = ? AND uid = ?")) {
+                stmt.setInt(1, postId);
+                stmt.setInt(2, uid);
+
+                ResultSet rs = stmt.executeQuery();
+                rs.next();
+                int likeCount = rs.getInt(1);
+
+                if (likeCount == 0) {
+                    try (PreparedStatement insertStmt = conn.prepareStatement("INSERT INTO postLike (postId, uid) VALUES (?, ?)")) {
+                        insertStmt.setInt(1, postId);
+                        insertStmt.setInt(2, uid);
+                        insertStmt.executeUpdate();
+                    }
+                    response.setContentType("text/plain");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write("Liked post with ID " + postId);
+                } else {
+                    response.setContentType("text/plain");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write("User already liked this post");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle the exception appropriately
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("An error occurred while processing your request.");
+        }
+    }
+}

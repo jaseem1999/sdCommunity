@@ -80,6 +80,18 @@
 </servlet-mapping>
 
 	
+<servlet>
+    <servlet-name>postLike</servlet-name>
+    <servlet-class>sdCommunity.user.post.PostLike</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>postLike</servlet-name>
+    <url-pattern>/Like</url-pattern>
+</servlet-mapping>
+
+  
+  
   
   
 </web-app>
