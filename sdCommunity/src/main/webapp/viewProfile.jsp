@@ -126,6 +126,9 @@ a{
 		</div>
 
 	<ul class="nav justify-content-end ">
+		<li class="nav-item" >
+		    	<a class='nav-link' style="padding: 0px;" href='UserHome.jsp'><img src="./img/logo.png" alt="" width="50px"></a>
+			</li>
 		<li class="nav-item">
 		    	<a class='nav-link' href='UserHome.jsp'>Home</a>
 		  </li>
@@ -141,7 +144,7 @@ a{
 		  <li class="nav-item">
 		    <%
 		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Followers</a>");
+		  		out.print("<a class='nav-link' href='userFollowers.jsp'>Followers</a>");
 		  	}else{
 		  		out.print("");
 		  	}

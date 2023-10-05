@@ -109,6 +109,9 @@ String position = (String) session.getAttribute("position");
 		</div>
 
 	<ul class="nav justify-content-end ">
+		<li class="nav-item" >
+		    	<a class='nav-link' style="padding: 0px;" href='UserHome.jsp'><img src="./img/logo.png" alt="" width="50px"></a>
+			</li>
 		<li class="nav-item">
 		    	<a class='nav-link' href='UserHome.jsp'>Home</a>
 		  </li>
@@ -124,7 +127,7 @@ String position = (String) session.getAttribute("position");
 		  <li class="nav-item">
 		    <%
 		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Followers</a>");
+		  		out.print("<a class='nav-link' href='userFollowers.jsp'>Followers</a>");
 		  	}else{
 		  		out.print("");
 		  	}
@@ -269,8 +272,8 @@ String position = (String) session.getAttribute("position");
         	return;
         	}
 
-        	if (file.size > 85 * 1024) { // Check if image size is greater than 200KB
-        	document.getElementById("imgError").innerHTML = "Please update image size lesthan 85kb";
+        	if (file.size > 55 * 1024) { // Check if image size is greater than 200KB
+        	document.getElementById("imgError").innerHTML = "Please update image size lesthan 55kb";
         	input.value = ""; // Clear the input field
         	img.src = "./css/img/User-profile.png"; // Set default image source
         	return;

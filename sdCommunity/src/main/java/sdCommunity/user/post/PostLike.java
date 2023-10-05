@@ -58,9 +58,9 @@ public class PostLike extends HttpServlet {
                  stmt.setInt(2, id);
                  stmt.executeUpdate();
                  int like = likes +1;
-                 response.getWriter().write("Liked post this " + like);
+                 response.getWriter().write("Liked (" + like+")");
              } else {
-                 response.getWriter().write("User already liked this post "+likes);
+                 response.getWriter().write("Already liked "+likes);
              }
          } catch (ClassNotFoundException | SQLException e) {
              e.printStackTrace(); // Handle the exception appropriately

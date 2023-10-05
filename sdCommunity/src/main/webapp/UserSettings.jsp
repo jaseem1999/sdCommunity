@@ -73,7 +73,7 @@ a{
 		  <li class="nav-item">
 		    <%
 		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Followers</a>");
+		  		out.print("<a class='nav-link' href='userFollowers.jsp'>Followers</a>");
 		  	}else{
 		  		out.print("");
 		  	}

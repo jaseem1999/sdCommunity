@@ -207,5 +207,47 @@ public class DAOPost {
 		return li;
 	}
 	
-		
+	public static List<DTOSolution> getSolution(String id) {
+		ArrayList<DTOSolution> li = new ArrayList<DTOSolution>();
+		Conn con= new Conn();
+		Connection conn =con.connection;
+		try {
+			String sql = "select s_id,uid, post_id ,link, codes from postSolution where post_id="+id+" order by s_id desc;";
+			PreparedStatement stm =conn.prepareStatement(sql);
+			ResultSet rs=stm.executeQuery();
+			
+			while(rs.next()) {
+				DTOSolution p = new DTOSolution();
+				p.setSid(rs.getInt(1));
+				p.setUid(rs.getInt(2));
+				p.setPostId(rs.getInt(3));
+				p.setLink(rs.getString(4));
+				p.setCode(rs.getString(5));
+				li.add(p);
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return li;
+	}
+	
+	public static int getVerify(int id) {
+		int count=0;
+		Conn con= new Conn();
+		Connection conn =con.connection;
+		try {
+			String sql = "SELECT COUNT(s_id) FROM verifySolution WHERE s_id ="+id+";";
+			PreparedStatement stm =conn.prepareStatement(sql);
+			ResultSet rs=stm.executeQuery();
+			
+			while(rs.next()) {
+				 count = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return count;
+	}
 }

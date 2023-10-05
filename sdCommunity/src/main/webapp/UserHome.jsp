@@ -84,12 +84,16 @@
 <body style="background-color: black">
 
 	<ul class="nav justify-content-end " >
+			<li class="nav-item" >
+		    	<a class='nav-link' style="padding: 0px;" href='UserHome.jsp'><img src="./img/logo.png" alt="" width="50px"></a>
+			</li>
 			<li class="nav-item">
 			<div class="" style="color: white; max-width: 100%; margin-left: 20px; margin-top: 5px;" id="showPost">
 				<input type="text" class="search" id="searchInput" placeholder="Enter search query">
 				<button class="btn btn-primary"	 onclick="search()" style="margin-top: -5px;">Search</button>
 			</div>
 			</li>
+			
 			<li class="nav-item">
 		    	<a class='nav-link' href='UserHome.jsp'>Home</a>
 			</li>
@@ -105,7 +109,7 @@
 		  <li class="nav-item">
 		    <%
 		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Followers</a>");
+		  		out.print("<a class='nav-link' href='userFollowers.jsp'>Followers</a>");
 		  	}else{
 		  		out.print("");
 		  	}
@@ -120,6 +124,14 @@
 		  	}
 		  %>
 		  </li>
+		   <li class="nav-item">
+		    <%
+		  	if (email != null){
+		  		out.print("<a class='nav-link' href='UserNotification.jsp'>Notification</a>");
+		  	}else{
+		  		out.print("");
+		  	}
+		  %>
 		  
 		  <li class="nav-item">
 		   <%
@@ -210,7 +222,7 @@
 					List<DTOpost> p= DAOPost.getPost();
 				%>
 			    
-			    <div class="col-8" style="background-color: #6699c130;">
+			    <div class="col-9" style="background-color: #6699c130;">
 			    <% for(DTOpost po : p){ %>
 			    	
 			      	<div class="" style="color: white; max-width: 100%; margin-left: 20px; margin-top: 10px;" id="showPost">
@@ -243,37 +255,9 @@
 					<hr style="color: white; border: 3px solid;">
 					 <%} %>
 			    </div>
-			    <div class="col-4" style="background-color: #d8d8cd3d ;">
+			    <div class="col-3" style="background-color: #d8d8cd3d ;">
 			    	
-			      	<div class="card" style="width: 18rem; margin-top: 30px;">
-						  <div class="card-body">
-						    <h5 class="card-title"><%=company %></h5>
-						    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						    <a href="#" class="card-link">Card link</a>
-						    <a href="#" class="card-link">Another link</a>
-						  </div>
-					</div>
-					
-					<div class="card" style="width: 18rem; margin-top: 30px;">
-						  <div class="card-body">
-						    <h5 class="card-title">Card title</h5>
-						    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						    <a href="#" class="card-link">Card link</a>
-						    <a href="#" class="card-link">Another link</a>
-						  </div>
-					</div>
-					<div class="card" style="width: 18rem; margin-top: 30px; margin-top: 30px;">
-						  <div class="card-body">
-						    <h5 class="card-title">Card title</h5>
-						    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						    <a href="#" class="card-link">Card link</a>
-						    <a href="#" class="card-link">Another link</a>
-						  </div>
-					</div>
-					
+			      	
 			    </div>
 			   
 			    

@@ -90,8 +90,36 @@
     <url-pattern>/Like</url-pattern>
 </servlet-mapping>
 
+<servlet>
+    <servlet-name>postSolution</servlet-name>
+    <servlet-class>sdCommunity.user.post.Solution</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>postSolution</servlet-name>
+    <url-pattern>/sol</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>verifySolution</servlet-name>
+    <servlet-class>sdCommunity.user.post.SolutionVerify</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>verifySolution</servlet-name>
+    <url-pattern>/Verify</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Follow</servlet-name>
+    <servlet-class>sdCommunity.user.follow.FollowServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Follow</servlet-name>
+    <url-pattern>/Followers</url-pattern>
+</servlet-mapping>
   
-  
+
+
+
   
   
 </web-app>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<servlet>
-    <servlet-name>Ad</servlet-name>
-    <servlet-class>sdCommunity.user.profile.ProfileServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>Ad</servlet-name>
-    <url-pattern>/Add</url-pattern>
-</servlet-mapping>

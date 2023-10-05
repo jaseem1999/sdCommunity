@@ -11,6 +11,7 @@
 <meta charset="ISO-8859-1">
 <%
 String spid= request.getParameter("id");
+
 %>
 <%
 Integer id =(Integer)session.getAttribute("uid");
@@ -175,6 +176,9 @@ button {
 		</div>
 
 	<ul class="nav justify-content-end ">
+		<li class="nav-item" >
+		    	<a class='nav-link' style="padding: 0px;" href='UserHome.jsp'><img src="./img/logo.png" alt="" width="50px"></a>
+			</li>
 		<li class="nav-item">
 		    	<a class='nav-link' href='UserHome.jsp'>Home</a>
 		  </li>
@@ -190,7 +194,7 @@ button {
 		  <li class="nav-item">
 		    <%
 		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Followers</a>");
+		  		out.print("<a class='nav-link' href='userFollowers.jsp'>Followers</a>");
 		  	}else{
 		  		out.print("");
 		  	}
@@ -261,6 +265,7 @@ button {
 		<%
 					response.setContentType("text/html");
 					List<DTOpost> p= DAOPost.getAllPostDetails(spid);
+					
 				%>
 				
 			<div class="row">
@@ -270,6 +275,10 @@ button {
 			    	
 			      	<div class="" style="color: white; max-width: 100%; margin-left: 0px; margin-top: 10px;" >
 						  <img src="poimg?id=<%=po.getPostId()%>" style="width : 100%; height: 200px;" alt="...">
+						  <%
+						  int pid = po.getPostId();
+						  session.setAttribute("spid", pid);
+						  %>
 						  <img style="width: 50px; height: 50px; border-radius: 50%; margin-top: 5px; margin-left: 10px;border: 2px solid; " alt="" src="image?id=<%=po.getUid()%>">
 						  <div class="card-body">
 							    <h5 class="" style="text-align: center; margin: 10px;"><%=po.getHeading()%></h5>   	
@@ -302,7 +311,7 @@ button {
 		    		<h5>Code :</h5>
 		    		<pre id="showCode"></pre>
 					</div>
-					<form action="" >
+					<form action="sol" method="post" >
 						<label for="link">Paste your link:</label>
             				<input type="url" id="link" name="link" oninput="updateLink()"><br>
 						<label for="code">Programming Code:</label>
