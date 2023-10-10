@@ -29,4 +29,24 @@ public class DAODetails {
 		String name = fname + " "+ lname;
 		return name;
 	}
+	public static String getPostHeading(int id) {
+		String Heading = null;
+		Conn con= new Conn();
+		Connection conn =con.connection;
+		try {
+			String sql = "select heading from userPost where post_id="+id+";";
+			PreparedStatement stm =conn.prepareStatement(sql);
+			ResultSet rs=stm.executeQuery();
+			
+			while(rs.next()) {
+				Heading = rs.getString(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return Heading;
+		
+	}
 }
+

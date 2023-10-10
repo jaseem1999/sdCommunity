@@ -141,15 +141,7 @@ Integer like= 0;
 		  	}
 		  %>
 		  </li>
-		  <li class="nav-item">
-		    <%
-		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Chat</a>");
-		  	}else{
-		  		out.print("");
-		  	}
-		  %>
-		  </li>
+		  
 		  
 		  <li class="nav-item">
 		   <%
@@ -163,7 +155,7 @@ Integer like= 0;
 		  <li class="nav-item">
 		  <%
 		  	if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'>Profile</a>");
 		  		}
 		  		else{
@@ -188,7 +180,7 @@ Integer like= 0;
 		  <li class="nav-item">
 		  <%
 		  if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'><img alt='' src='image?id="+id+"' style=' width: 35px; border-radius: 50%; height: 35px;border: 1px solid white;'/></a>");
 		  		}
 		  		else{
@@ -348,6 +340,8 @@ Integer like= 0;
 				    					             ResultSet rs1 = stmt1.executeQuery(); // Corrected variable name
 				    					             rs1.next();
 				    					             int likes = rs1.getInt(1);
+				    					             int likUid = po.getUid();
+				    					             session.setAttribute("likUid", likUid);
 												   
 												%>
 							    	 	

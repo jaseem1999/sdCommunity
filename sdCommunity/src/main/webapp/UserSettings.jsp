@@ -101,7 +101,7 @@ a{
 		  <li class="nav-item">
 		  <%
 		  	if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'>Profile</a>");
 		  		}
 		  		else{
@@ -126,7 +126,7 @@ a{
 		  <li class="nav-item">
 		  <%
 		  if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'><img alt='' src='image?id="+id+"' style=' width: 35px; border-radius: 50%; height: 35px;border: 1px solid white;'/></a>");
 		  		}
 		  		else{
@@ -138,6 +138,14 @@ a{
 		  %>
 		  </li>
 	</ul>
+	<%
+	String message = request.getParameter("message");
+	if (message != null && message.equals("Failed")){
+		out.print("<div class='alert alert-danger' role='alert'>Enter Valid name or fill first name and last name...<br>Try again...</div>");
+	}else{
+		out.print("");
+	}
+	%>
 	
 	<div class="container-xl" style="color: white; margin-top: 20px;">
   <div class="row">
@@ -162,6 +170,12 @@ a{
   				</a>
     		
     		</div>
+    		<div class="text-center sattingsOptions">
+    			<a data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
+    				Change Name
+  				</a>
+    		
+    		</div>
     		
     		
     	</div>
@@ -172,17 +186,17 @@ a{
     	<div class="collapse" id="collapseExample" style="margin: 5px;">
   			<div class="card"  style="background-color:#5f5fd13b ">
     		
-    			<form action="" style="margin: 20px;">
+    			<form action="cNumber" method="post" style="margin: 20px;">
     			  <div class="mb-3 row">
 					    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
 					    <div class="col-sm-10">
-					      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%=email%>" style="color: white;">
+					      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="staticEmail" value="<%=email%>" style="color: white;">
 					    </div>
 					  </div>
 					    <div class="mb-3 row">
 			    		<label for="exampleInputNumber" class="col-sm-2 col-form-label">Number</label>
 			    		<div class="col-sm-10">
-					      <input type="tel" class="form-control" id="inputNumber">
+					      <input type="tel" class="form-control" name="inputNumber" id="inputNumber">
 					    </div>
 			    		<br><span class="error" id="nom"></span>
 			  			</div>
@@ -193,25 +207,26 @@ a{
 		</div>
 		<div class="collapse" id="collapseExample2"  style="margin: 5px;">
   			<div class="card"  style="background-color:#5f5fd13b ">
-    			<form action="" style="margin: 20px;">
+    			<form onsubmit="return validate()" action="cPass" method="post" style="margin: 20px;">
     			
     				<div class="mb-3 row">
 					    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
 					    <div class="col-sm-10">
-					      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%=email%>" style="color: white;">
+					      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="staticEmail" value="<%=email%>" style="color: white;">
 					    </div>
 					  </div>
 					  <div class="mb-3 row">
 					    <label for="inputPassword" class="col-sm-2 col-form-label">Enter new Password</label>
 					    <div class="col-sm-10">
-					      <input type="password" class="form-control" id="inputPassword">
+					      <input type="password" class="form-control" id="inputPassword" name="inputPassword">
 					    </div>
+					    <span style="color: red;" id="psw"></span>
 					    </div>
 					    
 					    <div class="mb-3 row">
 					    <label for="inputPassword" class="col-sm-2 col-form-label">Re-enter new password</label>
 					    <div class="col-sm-10">
-					      <input type="password" class="form-control" id="inputRepassword">
+					      <input type="password" class="form-control" id="inputRepassword" name="inputRepassword">
 					    </div>
 					    </div>
 					   
@@ -221,21 +236,45 @@ a{
     		</div>
 		</div>
 		<div class="collapse" id="collapseExample3"  style="margin: 5px;">
-  			<div class="card"  style="background-color:#5f5fd13b ">
-    			<form action="" style="margin: 20px;">
+    			<form onsubmit="return emailValidate()" action="cEmail" method="post" style="margin: 20px;">
     				<div class="mb-3 row">
 					    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
 					    <div class="col-sm-10">
-					      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%=email%>" style="color: white;">
+					      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="staticEmail" value="<%=email%>" style="color: white;">
 					    </div>
 					  </div>
 					  <div class="mb-3 row">
 					    <label for="inputEmail" class="col-sm-2 col-form-label">Enter new Email</label>
 					    <div class="col-sm-10">
-					      <input type="email" class="form-control" id="inputEmail">
+					      <input type="email" class="form-control" id="inputEmail" name="inputEmail">
 					    </div>
+					    <span style="color: red;" id="eml"></span>
 					    </div> 
 			  			 <div id="center"><button type="submit" class="btn btn-primary" >Change Email</button></div>
+  					</form>
+  				
+    		</div>
+    		<div class="collapse" id="collapseExample4"  style="margin: 5px;">
+    			<form action="cName" method="post" style="margin: 20px;">
+    				<div class="mb-3 row">
+					    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+					    <div class="col-sm-10">
+					      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="staticEmail" value="<%=email%>" style="color: white;">
+					    </div>
+					  </div>
+					  <div class="mb-3 row">
+					    <label for="inputFName" class="col-sm-2 col-form-label">Enter new First Name</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="inputFname" name="inputFname">
+					    </div>
+					    </div>
+					    <div class="mb-3 row">
+					    <label for="inputLname" class="col-sm-2 col-form-label">Enter new Last name</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="inputLname" name="inputLname">
+					    </div>
+					    </div>  
+			  			 <div id="center"><button type="submit" class="btn btn-primary" >Change Name</button></div>
   					</form>
   				
     		</div>
@@ -243,7 +282,38 @@ a{
 		
     </div>
   </div>
-  </div>
+
+
+<script type="text/javascript">
+
+	function validate() {
+		let pass = document.getElementById("inputPassword").value;
+	    let rpass = document.getElementById("inputRepassword").value;
+	    let status = true
+	    if (pass !== rpass) {
+	        document.getElementById("psw").innerHTML = "Passwords do not match";
+	        status = false;
+	    } else if (!(pass.length >= 6 && /[a-z]/.test(pass) && /[A-Z]/.test(pass) && /\d/.test(pass) && /[^a-zA-Z\d]/.test(pass))) {
+	        document.getElementById("psw").innerHTML = "Password must be strong (use A-Z, a-z, 0-9, special character, and be at least 6 characters long)";
+	      	status = false;
+	    } else {
+	        document.getElementById("psw").innerHTML = ""; // Clear error message
+	    }
+	    return status;
+	}
+	function emailValidate() {
+		let email = document.getElementById("inputEmail").value;
+		let status = true;
+		if (!(email.includes("@") && email.includes("."))) {
+	        document.getElementById("eml").innerHTML = "Please enter a valid email";
+	        status = false;
+	    } else {
+	        document.getElementById("eml").innerHTML = ""; // Clear error message
+	    }
+		return status;
+	}
+	
+</script>
 	
 </body>
 </html>

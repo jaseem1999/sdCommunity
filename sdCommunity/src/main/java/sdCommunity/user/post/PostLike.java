@@ -24,8 +24,10 @@ public class PostLike extends HttpServlet {
     	HttpSession session = request.getSession();
     	 int postId = Integer.parseInt(request.getParameter("postId"));
     	 Integer id =(Integer)session.getAttribute("uid");
+    	 Integer likUid =(Integer)session.getAttribute("likUid");
     	 System.out.println("user id :: "+id);
     	 System.out.println("start post like");
+    	 System.out.println("uid of post :: "+likUid);
     	 System.out.println("post id :"+postId);
     	 Connection connection = null;
          PreparedStatement stmt = null;
@@ -52,10 +54,11 @@ public class PostLike extends HttpServlet {
              System.out.println(likes);
              if (likeCount == 0) {
                  // User hasn't liked the post, so insert the like
-                 String insertQuery = "INSERT INTO postLike (postId, uid) VALUES (?, ?)";
+                 String insertQuery = "INSERT INTO postLike (postId, uid, likeUid) VALUES (?, ?, ?)";
                  stmt = connection.prepareStatement(insertQuery);
                  stmt.setInt(1, postId);
                  stmt.setInt(2, id);
+                 stmt.setInt(3, likUid);
                  stmt.executeUpdate();
                  int like = likes +1;
                  response.getWriter().write("Liked (" + like+")");

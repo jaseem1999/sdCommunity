@@ -34,6 +34,7 @@ String slname=null;
 String smail=null;
 String spass= null;
 long snum=0;
+String bstatus = null;
 
 int spid=0;
 byte[] simg = null;
@@ -53,7 +54,7 @@ try {
 	
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sdCommunity","root", "Love1999@MySQL");
-	PreparedStatement stm =con.prepareStatement("select * from user where  email='"+email+"' and password='"+pass+"';");
+	PreparedStatement stm =con.prepareStatement("select userId,fname,lname,email,password,number,status from user where  email='"+email+"' and password='"+pass+"';");
 	ResultSet rs=stm.executeQuery();
 	while(rs.next()) {
 		sid = rs.getInt(1);
@@ -62,6 +63,7 @@ try {
 		smail=rs.getString(4);
 		spass=rs.getString(5);
 		snum=rs.getLong(6);
+		bstatus=rs.getString(7);
 		
 	}
 	
@@ -126,7 +128,12 @@ if (i > 0) {
 	session.setAttribute("nation", snational);
 	session.setAttribute("gender", sgender);
 	session.setAttribute("website", swebsite);
-    response.sendRedirect("UserHome.jsp");
+	if(bstatus != null){
+		 response.sendRedirect("Login.jsp?message=Blocked");
+	}else{
+		 response.sendRedirect("UserHome.jsp");	
+	}
+   
 } else {
     response.sendRedirect("Login.jsp?message=Failed");
 }

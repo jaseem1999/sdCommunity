@@ -106,6 +106,7 @@
 			<li class="nav-item" >
 		    	<a class='nav-link' style="padding: 0px;" href='UserHome.jsp'><img src="./img/logo.png" alt="" width="50px"></a>
 			</li>
+			
 			<li class="nav-item">
 		    	<a class='nav-link' href='UserHome.jsp'>Home</a>
 			</li>
@@ -128,15 +129,7 @@
 		  	}
 		  %>
 		  </li>
-		  <li class="nav-item">
-		    <%
-		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Chat</a>");
-		  	}else{
-		  		out.print("");
-		  	}
-		  %>
-		  </li>
+		 
 		  
 		  <li class="nav-item">
 		   <%
@@ -250,7 +243,7 @@ function validateForm() {
 		document.getElementById("updatedImg").innerHTML = image;
 	}
 
-    if (company.value === "") {
+    if (college.value === "") {
         document.getElementById("companyError").innerHTML = "Please enter your company/college name";;
         status = false;
     }

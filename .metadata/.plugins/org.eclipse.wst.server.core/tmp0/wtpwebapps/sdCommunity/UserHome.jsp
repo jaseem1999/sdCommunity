@@ -20,7 +20,7 @@
 	String lname=(String)session.getAttribute("lname"); 
 	String email=(String)session.getAttribute("email");
 	long num=(Long)session.getAttribute("num");
-	String company=(String)session.getAttribute("company");
+	String college=(String)session.getAttribute("college");
 	String base64ImageJpg = (String) session.getAttribute("base64Image");
 	int postId = 0;
 	Integer like= 0;
@@ -83,9 +83,12 @@
 </head>
 <body style="background-color: black">
 
-	<ul class="nav justify-content-end " >
+	<ul class="nav justify-content-end " style="">
 			<li class="nav-item" >
 		    	<a class='nav-link' style="padding: 0px;" href='UserHome.jsp'><img src="./img/logo.png" alt="" width="50px"></a>
+			</li>
+			<li class="nav-item"  style="padding: 10px;">
+		    	sdCommunity
 			</li>
 			<li class="nav-item">
 			<div class="" style="color: white; max-width: 100%; margin-left: 20px; margin-top: 5px;" id="showPost">
@@ -93,6 +96,7 @@
 				<button class="btn btn-primary"	 onclick="search()" style="margin-top: -5px;">Search</button>
 			</div>
 			</li>
+			
 			
 			<li class="nav-item">
 		    	<a class='nav-link' href='UserHome.jsp'>Home</a>
@@ -115,15 +119,7 @@
 		  	}
 		  %>
 		  </li>
-		  <li class="nav-item">
-		    <%
-		  	if (email != null){
-		  		out.print("<a class='nav-link' href='userChat.jsp'>Chat</a>");
-		  	}else{
-		  		out.print("");
-		  	}
-		  %>
-		  </li>
+		  
 		   <li class="nav-item">
 		    <%
 		  	if (email != null){
@@ -145,7 +141,7 @@
 		  <li class="nav-item">
 		  <%
 		  	if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'>Profile</a>");
 		  		}
 		  		else{
@@ -170,7 +166,7 @@
 		  <li class="nav-item">
 		  <%
 		  if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'><img alt='' src='image?id="+id+"' style=' width: 35px; border-radius: 50%; height: 35px;border: 1px solid white;'/></a>");
 		  		}
 		  		else{

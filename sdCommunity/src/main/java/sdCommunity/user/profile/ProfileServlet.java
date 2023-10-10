@@ -46,7 +46,7 @@ public class ProfileServlet extends HttpServlet {
 		String fname=(String)session.getAttribute("fname"); 
 		String lname=(String)session.getAttribute("lname"); 
 		String email=(String)session.getAttribute("email");
-		Integer num=(Integer)session.getAttribute("num");;
+		Long num=(Long)session.getAttribute("num");;
 		
 		String company = request.getParameter("company");
 		String about = request.getParameter("about");

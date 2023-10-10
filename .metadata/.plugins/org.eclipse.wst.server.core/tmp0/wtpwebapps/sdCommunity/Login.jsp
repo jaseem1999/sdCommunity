@@ -51,6 +51,35 @@ button {
 			}else{
 				out.print("");
 			}
+			if(message != null && message.equals("Blocked")){
+				out.print("<div class='alert alert-danger' role='alert'>Login Blocked...<br>Contact admin...</div>");
+			}
+			if(message != null && message.equals("numberSuccess")){
+				out.print("<div class='alert alert-success' role='alert'>Number Updated Successfully...<br>Login again...</div>");
+			}
+			if(message != null && message.equals("numberFailed")){
+				out.print("<div class='alert alert-danger' role='alert'>Number Updated Failed... Try again<br>or contact admin...</div>");
+			}
+			if(message != null && message.equals("passwordSuccess")){
+				out.print("<div class='alert alert-success' role='alert'>Password Updated Successfully...<br>Login again...</div>");
+			}
+			if(message != null && message.equals("passwordFailed")){
+				out.print("<div class='alert alert-danger' role='alert'>password Updated Failed... Try again<br>or contact admin...</div>");
+			}
+			if(message != null && message.equals("emailSuccess")){
+				out.print("<div class='alert alert-success' role='alert'>Email Updated Successfully...<br>Login again...</div>");
+			}
+			if(message != null && message.equals("emailFailed")){
+				out.print("<div class='alert alert-danger' role='alert'>password Updated Failed... Try again<br>or contact admin...</div>");
+			}
+			if(message != null && message.equals("nameSuccess")){
+				out.print("<div class='alert alert-success' role='alert'>Name Updated Successfully...<br>Login again...</div>");
+			}
+			if(message != null && message.equals("nameFailed")){
+				out.print("<div class='alert alert-danger' role='alert'>Name Updated Failed... Try again<br>or contact admin...</div>");
+			}
+			
+					
 %>
 		
 			  <div class="row">

@@ -32,6 +32,8 @@
     <url-pattern>/settingsAccess</url-pattern>
 </servlet-mapping>
 
+
+
  
  <servlet>
     <servlet-name>Post</servlet-name>
@@ -119,7 +121,51 @@
   
 
 
+<servlet>
+    <servlet-name>postDelete</servlet-name>
+    <servlet-class>sdCommunity.user.post.DeleteServlet</servlet-class>
+</servlet>
 
+<servlet-mapping>
+    <servlet-name>postDelete</servlet-name>
+    <url-pattern>/pd</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Number</servlet-name>
+    <servlet-class>sdCommunity.user.settings.NumberChangeServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Number</servlet-name>
+    <url-pattern>/cNumber</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Password</servlet-name>
+    <servlet-class>sdCommunity.user.settings.PasswordChangeServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Password</servlet-name>
+    <url-pattern>/cPass</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Email</servlet-name>
+    <servlet-class>sdCommunity.user.settings.EmailChangeServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Email</servlet-name>
+    <url-pattern>/cEmail</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Name</servlet-name>
+    <servlet-class>sdCommunity.user.settings.NameChangeServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Name</servlet-name>
+    <url-pattern>/cName</url-pattern>
+</servlet-mapping>
   
   
 </web-app>

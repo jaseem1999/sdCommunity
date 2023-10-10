@@ -157,15 +157,7 @@ a{
 		  	}
 		  %>
 		  </li>
-		  <li class="nav-item">
-		    <%
-		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Chat</a>");
-		  	}else{
-		  		out.print("");
-		  	}
-		  %>
-		  </li>
+		  
 		  
 		  <li class="nav-item">
 		   <%
@@ -179,7 +171,7 @@ a{
 		  <li class="nav-item">
 		  <%
 		  	if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'>Profile</a>");
 		  		}
 		  		else{
@@ -204,7 +196,7 @@ a{
 		  <li class="nav-item">
 		  <%
 		  	if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'><img alt='' src='image?id="+id+"' style=' width: 35px; border-radius: 50%; height: 35px;border: 1px solid white;'/></a>");
 		  		}
 		  		else{
@@ -287,6 +279,7 @@ a{
 					out.print("<span class='smallAbout' style='width :600px;'>"+oabout+"</span><br>");
 				
 			%>
+			<a href="userConnection.jsp?id=<%=ouid%>">Connections</a>
 			<hr>
 		</div>
 		<div class="col">

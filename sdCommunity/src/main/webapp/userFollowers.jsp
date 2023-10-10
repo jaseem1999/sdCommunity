@@ -111,7 +111,7 @@ td,th{
 	min-width: 130px;
 }
 header h4 {
-  font-size: 70px;
+  font-size: 30px;
   font-weight: 600;
   background-image: linear-gradient(to left, #553c9a, #b393d3);
   color: transparent;
@@ -171,15 +171,6 @@ header h4 {
 		  	}
 		  %>
 		  </li>
-		  <li class="nav-item">
-		    <%
-		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Chat</a>");
-		  	}else{
-		  		out.print("");
-		  	}
-		  %>
-		  </li>
 		  
 		  <li class="nav-item">
 		   <%
@@ -193,7 +184,7 @@ header h4 {
 		  <li class="nav-item">
 		  <%
 		  	if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'>Profile</a>");
 		  		}
 		  		else{
@@ -218,7 +209,7 @@ header h4 {
 		  <li class="nav-item">
 		  <%
 		  	if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'><img alt='' src='image?id="+id+"' style=' width: 35px; border-radius: 50%; height: 35px;border: 1px solid white;'/></a>");
 		  		}
 		  		else{

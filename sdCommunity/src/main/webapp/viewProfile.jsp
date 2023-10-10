@@ -20,7 +20,7 @@ String gender = (String) session.getAttribute("gender");
 String about = (String) session.getAttribute("about");
 String college = (String) session.getAttribute("college");
 String position = (String) session.getAttribute("position");
-
+int userPostId = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -150,15 +150,7 @@ a{
 		  	}
 		  %>
 		  </li>
-		  <li class="nav-item">
-		    <%
-		  	if (email != null){
-		  		out.print("<a class='nav-link' href=''>Chat</a>");
-		  	}else{
-		  		out.print("");
-		  	}
-		  %>
-		  </li>
+		  
 		  
 		  <li class="nav-item">
 		   <%
@@ -172,7 +164,7 @@ a{
 		  <li class="nav-item">
 		  <%
 		  	if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'>Profile</a>");
 		  		}
 		  		else{
@@ -197,7 +189,7 @@ a{
 		  <li class="nav-item">
 		  <%
 		  	if (email != null){
-		  		if (company != null){
+		  		if (college != null){
 		  			out.print("<a class='nav-link' href='viewProfile.jsp'><img alt='' src='image?id="+id+"' style=' width: 35px; border-radius: 50%; height: 35px;border: 1px solid white;'/></a>");
 		  		}
 		  		else{
@@ -209,6 +201,12 @@ a{
 		  %>
 		  </li>
 	</ul>
+	<%
+	String message = request.getParameter("message");
+	if(message != null && message.equals("Blocked")){
+				out.print("<div class='alert alert-danger' role='alert'>Post Deleted sucessfully</div>");
+	}
+	 %>
 	
 	<div class="fistPartOfProfileMain">
 	<div class="fistPartOfProfile">
@@ -218,7 +216,7 @@ a{
 	</div>
 	</div>
 	
-	<div class="container hbdy" style="margin-top: 10px; background: #5f5fd13b;">
+	<div class="container hbdy" id="PostRefresh" style="margin-top: 10px; background: #5f5fd13b;">
 		<img alt="" src="image?id=<%=id%>" style="width:150px;height:150px ; border-radius: 50%; margin-top: -100px; border: 5px solid white; ">	
 		<div class="row">
 		<div class="col">
@@ -357,20 +355,27 @@ a{
 					}
 				%>
     		</div>
-    		<div class="col-md-8">
+    		<div class="col-md-8" >
     		<%
 					response.setContentType("text/html");
 					List<DTOpost> p= DAOPost.getPost(id);
 				%>
-			    
+			    <span id="dpost" style="color: red;"></span>
 			    <div style="background-color: #6699c130;">
+			    
 			    <% for(DTOpost po : p){ %>
 			    	
 			      	<div class="" style="color: white; max-width: 100%; margin-left: 0px; margin-top: 10px;" id="center">
 						  <img src="poimg?id=<%=po.getPostId()%>" style="width : 100%; height: 200px;" alt="...">
 						  <img style="width: 50px; height: 50px; border-radius: 50%; margin-top: 5px; margin-left: 10px;border: 2px solid; " alt="" src="image?id=<%=po.getUid()%>">
+						  <a  style="position: relative; left: 73%;" href="#" onclick="sendToServlet('<%=po.getPostId()%>')">
+						  	<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+								  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+								  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+							</svg>
+						  </a>
 						  <div class="card-body">
-							    <h5 class="" style="text-align: center; margin: 10px;"><%=po.getHeading()%></h5>   	
+							    <h5 class="" style="text-align: center; margin: 10px;"><%=po.getHeading()%></h5>
 							    	<p class="card-text" style="margin: 30px;"><%=po.getPost()%></p>
 							    	<a href="<%=po.getLink() %>" class="btn-primary" style="margin-left: 30px;"><%=po.getLink() %></a>
 									<div class="code">	
@@ -400,6 +405,7 @@ a{
     		</div>
   		</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 	function copyToClipboard() {
 	    var copyText = document.getElementById("copy");
@@ -411,6 +417,23 @@ a{
 	    window.getSelection().removeAllRanges();
 	    alert("Code copied to clipboard");
 	}
+	
+	
+	function sendToServlet(postId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "pd", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                console.log("Request successful!");
+                document.getElementById("dpost").innerHTML = "Post deleted successfully";
+                location.reload(); 	
+            }
+        };
+        xhr.send("postId=" + encodeURIComponent(postId));
+    }
+	
+
 	
 	</script>
 

@@ -18,10 +18,10 @@ public class DAOPost {
 		Conn con= new Conn();
 		Connection conn =con.connection;
 		try {
-			String sql = "select post_id, uid, heading,link, post, codes from userPost order by post_id desc;";
+			String sql = "select post_id, uid, heading,link, post, codes, status from userPost order by post_id desc;";
 			PreparedStatement stm =conn.prepareStatement(sql);
 			ResultSet rs=stm.executeQuery();
-			
+			String status=null;
 			while(rs.next()) {
 				DTOpost p = new DTOpost();
 				p.setPostId(rs.getInt(1));
@@ -30,7 +30,12 @@ public class DAOPost {
 				p.setLink(rs.getString(4));
 				p.setPost(rs.getString(5));
 				p.setCode(rs.getString(6));
-				li.add(p);
+				status = rs.getString(7);
+				if(status != null) {
+					
+				}else {
+					li.add(p);
+				}
 			}
 			
 		} catch (Exception e) {
@@ -43,7 +48,7 @@ public class DAOPost {
 		Conn con= new Conn();
 		Connection conn =con.connection;
 		try {
-			String sql = "select post_id, uid, heading,link, post, codes from userPost where uid="+id+" order by post_id desc;";
+			String sql = "select post_id, uid, heading,link, post, codes, status from userPost where uid="+id+" order by post_id desc;";
 			PreparedStatement stm =conn.prepareStatement(sql);
 			ResultSet rs=stm.executeQuery();
 			
@@ -55,7 +60,12 @@ public class DAOPost {
 				p.setLink(rs.getString(4));
 				p.setPost(rs.getString(5));
 				p.setCode(rs.getString(6));
-				li.add(p);
+				String status = rs.getString(7);
+				if(status != null) {
+					
+				}else {
+					li.add(p);
+				}
 			}
 			
 		} catch (Exception e) {
@@ -212,7 +222,7 @@ public class DAOPost {
 		Conn con= new Conn();
 		Connection conn =con.connection;
 		try {
-			String sql = "select s_id,uid, post_id ,link, codes from postSolution where post_id="+id+" order by s_id desc;";
+			String sql = "select s_id,uid, post_id ,link, codes, status from postSolution where post_id="+id+" order by s_id desc;";
 			PreparedStatement stm =conn.prepareStatement(sql);
 			ResultSet rs=stm.executeQuery();
 			
@@ -223,7 +233,12 @@ public class DAOPost {
 				p.setPostId(rs.getInt(3));
 				p.setLink(rs.getString(4));
 				p.setCode(rs.getString(5));
-				li.add(p);
+				String status = rs.getString(6);
+				if(status != null) {
+					
+				}else {
+					li.add(p);
+				}
 			}
 			
 		} catch (Exception e) {
