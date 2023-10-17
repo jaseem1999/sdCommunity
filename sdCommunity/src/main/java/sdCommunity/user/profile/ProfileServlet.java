@@ -76,9 +76,7 @@ public class ProfileServlet extends HttpServlet {
 				
 		            // Obtain input stream of uploaded file
 		        InputStream is = part.getInputStream();
-		            
-				
-				
+		      
 				statement.setBlob(1, is);
 				statement.setString(2, about);
 				statement.setString(3, company);

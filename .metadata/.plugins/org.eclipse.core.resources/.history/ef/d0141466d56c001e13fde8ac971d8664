@@ -1,0 +1,54 @@
+package sdCommunity.advUser.login;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import sdCommunity.conn.Conn;
+
+
+public class AdvUserLoginDAO {
+	static AdvUserLoginDTO user = new AdvUserLoginDTO();
+	public static void login(String email, String pass) {
+		user.setEmail(email);
+		user.setPass(pass);
+	}
+	public static int validate() {
+		Conn con = new Conn();
+		Connection connection = con.connection;
+		ResultSet rs = null;
+		String sql ="Select advId,email,name,agName,phone,password,status from adv_user where email=? and password=?;";
+			try (PreparedStatement statement = connection.prepareStatement(sql)) {
+	            statement.setString(1, user.getEmail());
+	            statement.setString(2, user.getPass());
+	            rs = statement.executeQuery();
+	            if (rs.next()) {
+	                // User found, you can now retrieve other information if needed
+	            	int id = rs.getInt("advId");
+	                String email = rs.getString("email");
+	                String name = rs.getString("name");
+	                String agName = rs.getString("agName");
+	                long number = rs.getLong("phone");
+	                String pass = rs.getString("password");
+	                String status =  rs.getString("status");
+	              
+	                user.setId(id);
+	                user.setEmail(email);
+	                user.setPass(pass);
+	                user.setName(name);
+	                user.setAgName(agName);
+	                user.setNum(number);
+	                user.setStatus(status);
+	                
+	                return 1; // Successful login
+	            } else {
+	                return -1; // User not found
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+		
+		return 0;
+	}
+}

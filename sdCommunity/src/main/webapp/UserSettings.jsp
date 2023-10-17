@@ -52,6 +52,16 @@ a{
 #center{
 	text-align: center;
 }
+.profileImg{
+	width: 70px;
+	height: 100px;
+	border-radius: 50%;
+}
+.error{
+		color: red;
+		margin-left: 30px;
+		margin-top: 10px;
+}
 
 </style>
 
@@ -154,25 +164,31 @@ a{
     	
     		<div class="text-center sattingsOptions">
     			<a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    				change phone number
+    				change your phone number
   				</a>
     		</div>
     		
     		<div class="text-center sattingsOptions">
     			<a data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-    				change password 
+    				change your password 
   				</a>
     		</div>
     		
     		<div class="text-center sattingsOptions">
     			<a data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
-    				Change Email 
+    				Change your Email 
   				</a>
     		
     		</div>
     		<div class="text-center sattingsOptions">
     			<a data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
-    				Change Name
+    				Change Your Name
+  				</a>
+    		
+    		</div>
+    		<div class="text-center sattingsOptions">
+    			<a data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample">
+    				Change Your Profile
   				</a>
     		
     		</div>
@@ -278,6 +294,57 @@ a{
   					</form>
   				
     		</div>
+    		<div class="collapse" id="collapseExample5"  style="margin: 5px;">
+    		<div id="center">
+				<img class="profileImg" alt="" src="" id="updatedImg" style="width: 100px;"/><br>
+		    </div>
+    			<form onsubmit="return validateForm()" action="UAdd" method="post" enctype="multipart/form-data" style="margin: 20px;">
+    				 <label for="image" class="form-label ">Upload Image:</label>
+				        <input class="form-control custom-file-input" type="file" id="image" name="image" accept="image/*" onchange="displayImage()">
+						<span class="error" id="imgError"></span><br>
+						
+				        <label for="company" class="form-label">Company:</label>
+				        <input class="form-control" type="text" id="company" name="company">
+						<span class="error" id="companyError"></span><br>
+						
+						<label for="college" class="form-label">College:</label>
+				        <input class="form-control" type="text" id="college" name="college">
+						<span class="error" id="collegeError"></span><br>
+						
+						<label for="about" class="form-label">About:</label>
+				        <textarea class="form-control" type="text" id="about" name="about"></textarea>
+						<span class="error" id="aboutError"></span><br>
+						
+						<label for="position" class="form-label">Position:</label>
+				        <input class="form-control" type="text" id="position" name="position">
+						<span class="error" id="positionError"></span><br>
+						<label for="github" class="form-label">GitHub URL:</label>
+        				<input class="form-control" type="url" id="github" name="github">
+        				<span class="error" id="githubError"></span><br>
+
+        				<label for="linkedin" class="form-label">LinkedIn URL:</label>
+        				<input class="form-control" type="url" id="linkedin" name="linkedin">
+        				<span class="error" id="linkedinError"></span><br>
+
+        				<label for="nationality" class="form-label">Nationality:</label>
+        				<input type="text" id="nationality" name="nationality"><br><br>
+        				<span class="error" id="nationalityError"></span><br>
+
+        				<label for="gender" class="form-label">Gender:</label>
+        				<input  type="radio" id="male" name="gender" value="male">
+        				<label  for="male" class="form-label">Male</label>
+				        <input type="radio" id="female" name="gender" value="female">
+				        <label class="form-label" for="female">Female</label><br>
+				        <span class="error" id="genderError"></span><br>        
+
+				        <label for="website" class="form-label">Website URL:</label>
+				        <input class="form-control" type="url" id="website" name="website"><br><br>
+				        <span class="error" id="websiteError"></span><br>
+				
+				        <input type="submit" class="btn btn-primary" value="update">
+  				</form>
+  				
+    		</div>
 		</div>
 		
     </div>
@@ -311,6 +378,64 @@ a{
 	        document.getElementById("eml").innerHTML = ""; // Clear error message
 	    }
 		return status;
+	}
+	function validateForm() {
+	    var image = document.getElementById("image");
+	    var company = document.getElementById("company");
+	  
+	    var nationality = document.getElementById("nationality");
+	  
+		let status = true;
+	    if (image.value === "") {
+	        document.getElementById("imgError").innerHTML = "Please update img";
+	        status = false;
+	    }else{
+			document.getElementById("updatedImg").innerHTML = image;
+		}
+
+	    if (college.value === "") {
+	        document.getElementById("companyError").innerHTML = "Please enter your company/college name";;
+	        status = false;
+	    }
+
+
+	    if (nationality.value === "") {
+	        document.getElementById("nationalityError").innerHTML = "Please update nationality";
+	        status = false;
+	    }
+
+	    if (document.querySelector('input[name="gender"]:checked') === null) {
+	       	document.getElementById("genderError").innerHTML = "Please update gender";
+	        status = false;
+	    }
+
+	    return status;
+	}
+
+	function displayImage() {
+	var input = document.getElementById('image');
+	var img = document.getElementById('updatedImg');
+
+	var file = input.files[0];
+	var reader = new FileReader();
+
+	if (!file) {
+	img.src = "./css/img/User-profile.png"; // Set default image source
+	return;
+	}
+
+	if (file.size > 55 * 1024) { // Check if image size is greater than 200KB
+	document.getElementById("imgError").innerHTML = "Please update image size lesthan 55kb";
+	input.value = ""; // Clear the input field
+	img.src = "./css/img/User-profile.png"; // Set default image source
+	return;
+	}
+
+	reader.onload = function(e) {
+	img.src = e.target.result;
+	}
+
+	reader.readAsDataURL(file);
 	}
 	
 </script>

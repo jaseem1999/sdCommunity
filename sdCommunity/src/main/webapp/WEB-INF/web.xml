@@ -166,6 +166,15 @@
     <servlet-name>Name</servlet-name>
     <url-pattern>/cName</url-pattern>
 </servlet-mapping>
+<servlet>
+    <servlet-name>Uprofile</servlet-name>
+    <servlet-class>sdCommunity.user.profile.ProfileUpdateServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Uprofile</servlet-name>
+    <url-pattern>/UAdd</url-pattern>
+</servlet-mapping>
+
   
   
 </web-app>

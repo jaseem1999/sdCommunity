@@ -35,15 +35,16 @@ public class DAOnotif {
 		Conn con= new Conn();
 		Connection conn =con.connection;
 		try {
-			String sql = "select l.notif,l.userId,l.postId,l.notification from userPostLikeNotification l join postLike pl on l.userId = pl.uid where pl.likeUid ="+id+";";
+			String sql = "select notif,userId,likeUid,postId,notification from userPostLikeNotification where likeUid="+id+";";
 			PreparedStatement stm =conn.prepareStatement(sql);
 			ResultSet rs=stm.executeQuery();
 			while(rs.next()) {
 				DTOlikePost n = new DTOlikePost();
 				n.setNotiId(rs.getInt(1));
 				n.setUserId(rs.getInt(2));
-				n.setPostId(rs.getInt(3));
-				n.setNotification(rs.getString(4));
+				n.setLikeUid(rs.getInt(3));
+				n.setPostId(rs.getInt(4));
+				n.setNotification(rs.getString(5));
 				li.add(n);
 			}
 			

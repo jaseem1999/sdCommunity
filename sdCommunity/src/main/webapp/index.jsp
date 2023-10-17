@@ -27,6 +27,57 @@
  		width: 100%;
     	height: 500px;	
 	}
+	.AdsSignUp {
+	    font-size: 16px;
+	    color: #f6d8d8;
+	    text-align: center;
+	    padding: 10px;
+	    background-colors: #f8f8f8;
+	    border: 1px solid #ccc;
+	    border-radius: 5px;
+	    margin: 10px auto;
+	    max-width: 600px;
+	    position: relative;
+	    top: 0px;
+	}
+	#adsBox{
+		height: 700px;
+	}
+	.w-100{
+		height: 400px;
+		width: 300px;
+	}
+	.pName{
+		text-align: center;
+    	font-size: 25px;
+    	font-weight: 900;
+    	color: cyan;
+    	margin: 10px;
+	}
+	.cName{
+		position: relative;
+    	font-size: 15px;
+    	margin-right: 30px;
+    	left: 70%;
+    	color: #6c757d;
+    	font-style: italic;
+	}
+	.priceName{
+		position: relative;
+    	font-size: 60px;
+    	margin-right: 30px;
+    	left: 10%;
+    	color: #4cc600;
+    	margin-top: -64px;
+	}
+	.oName{
+		position: relative;
+	    font-size: 30px;
+	    margin-right: 30px;
+	    left: 43%;
+	    color: #ff1616;
+	    margin-top: -71px;
+	}
 	
    </style>
 </head>
@@ -93,6 +144,92 @@
 	    	
 	    	<div class="col-3">
 	    		
+	    		
+	    	</div>
+	    	
+	    	<div class="col">
+	    		
+	    	</div>
+	  	</div>
+  	</div>
+  	</div>
+  	<div class="container-xl">
+  <!-- Content here -->
+
+	<div class="back-fist-part">
+		<div class="row" >
+	    	<div class="col-8" >
+	    		
+	    	
+	    			<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+					  <div class="carousel-inner" id="adsBox">
+					    <div class="carousel-item active">
+					      	<img class="d-block w-100" src="./img/sn2..png" alt="First slide">
+					      <p class="pName">product2</p>
+					      <p class="cName">company2</p>
+					      <p class="priceName">
+					      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+							  <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+							  <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z"/>
+						  </svg>
+					      100</p>
+					      <p class="oName">20% Offer</p>
+					      <div style="text-align: center;">
+					      	<a href="" class="btn btn-success">goto</a>
+					      </div>
+					    </div>
+					    <div class="carousel-item" id="adsBox">
+					      <img class="d-block w-100" src="./img/thirdOneMainPage.jpg" alt="Second slide">
+					      <p class="pName">product3</p>
+					      <p class="cName">company3</p>
+					      <p class="priceName">
+					      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+							  <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+							  <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z"/>
+						  </svg>
+					      100</p>
+					      <p class="oName">20% Offer</p>
+					     <div style="text-align: center;">
+					      	<a href="" class="btn btn-success">goto</a>
+					      </div>
+					    </div>
+					    <div class="carousel-item" id="adsBox">
+					      <img class="d-block w-100" src="./img/Idea.png" alt="Third slide">
+					      <p class="pName">product4</p>
+					      <p class="cName">company4</p>
+					      <p class="priceName">
+					      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+							  <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+							  <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z"/>
+						  </svg>
+					      100</p>
+					      <p class="oName">20% Offer</p>
+					      <div style="text-align: center;">
+					      	<a href="" class="btn btn-success">goto</a>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+	    		
+	    		
+	    	</div>
+	    	
+	    	<div class="col-3">
+	    		<div class="AdsSignUp">
+	    			<p>"If you're interested in placing advertisements within the sdCommunity platform, simply sign up!"</p>
+	    		</div>
+	    		<a class="btn btn-primary" aria-current="page"  href="AdvSign.jsp"><span style=" padding: inherit;
+	    			background: #33495d00;
+	    			font-size: 16px;
+	    			font-weight: bold;
+	    			text-transform: uppercase;">Sign up</span></a>
+	    			<a class="btn btn-success" aria-current="page"  href="AdvLogin.jsp"><span style=" padding: inherit;
+	    			background: #33495d00;
+	    			font-size: 16px;
+	    			font-weight: bold;
+	    			text-transform: uppercase;">Login</span></a>
+	    	
+	    		 
 	    		
 	    	</div>
 	    	

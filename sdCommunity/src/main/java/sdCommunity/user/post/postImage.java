@@ -37,7 +37,6 @@ public class postImage extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
             // Assuming you have a database connection
-			System.out.println("start post img");
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sdCommunity","root", "Love1999@MySQL");
             String sql = "SELECT image FROM userPost WHERE post_id = ?";

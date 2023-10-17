@@ -113,7 +113,7 @@ public class DAOPost {
 		Conn con= new Conn();
 		Connection conn =con.connection;
 		try {
-			String sql = "SELECT p.post_id, p.uid, u.fname, u.lname,u.email,u.number, ui.about,ui.company, ui.college,ui.position,ui.github,ui.linkedin,ui.website,ui.nationality,ui.gender, p.heading, p.link, p.post, p.codes FROM userPost p JOIN user u ON u.userId = p.uid JOIN user_info ui ON ui.uid = p.uid WHERE p.uid ="+id+";";
+			String sql = "SELECT p.post_id, p.uid, u.fname, u.lname,u.email,u.number, ui.about,ui.company, ui.college,ui.position,ui.github,ui.linkedin,ui.website,ui.nationality,ui.gender, p.heading, p.link, p.post, p.codes, p.status FROM userPost p JOIN user u ON u.userId = p.uid JOIN user_info ui ON ui.uid = p.uid WHERE p.uid ="+id+";";
 			PreparedStatement stm =conn.prepareStatement(sql);
 			ResultSet rs=stm.executeQuery();
 			
@@ -138,7 +138,12 @@ public class DAOPost {
 				p.setLink(rs.getString(17));
 				p.setPost(rs.getString(18));
 				p.setCode(rs.getString(19));
-				li.add(p);
+				String status = rs.getString(20);
+				if (status != null) {
+					
+				} else {
+					li.add(p);
+				}
 			}
 			
 		} catch (Exception e) {
@@ -183,7 +188,7 @@ public class DAOPost {
 		Conn con= new Conn();
 		Connection conn =con.connection;
 		try {
-			String sql = "SELECT p.post_id, p.uid, u.fname, u.lname,u.email,u.number, ui.about,ui.company, ui.college,ui.position,ui.github,ui.linkedin,ui.website,ui.nationality,ui.gender, p.heading, p.link, p.post, p.codes FROM userPost p JOIN user u ON u.userId = p.uid JOIN user_info ui ON ui.uid = p.uid WHERE p.uid ="+id+";";
+			String sql = "SELECT p.post_id, p.uid, u.fname, u.lname,u.email,u.number, ui.about,ui.company, ui.college,ui.position,ui.github,ui.linkedin,ui.website,ui.nationality,ui.gender, p.heading, p.link, p.post, p.codes,p.status FROM userPost p JOIN user u ON u.userId = p.uid JOIN user_info ui ON ui.uid = p.uid WHERE p.uid ="+id+";";
 			PreparedStatement stm =conn.prepareStatement(sql);
 			ResultSet rs=stm.executeQuery();
 			
@@ -208,7 +213,13 @@ public class DAOPost {
 				p.setLink(rs.getString(17));
 				p.setPost(rs.getString(18));
 				p.setCode(rs.getString(19));
-				li.add(p);
+				String status = rs.getString(20);
+				if (status != null) {
+					
+				} else {
+					li.add(p);
+				}
+				
 			}
 			
 		} catch (Exception e) {

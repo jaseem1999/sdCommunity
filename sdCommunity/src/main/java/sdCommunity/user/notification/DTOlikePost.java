@@ -4,7 +4,15 @@ public class DTOlikePost {
 	private int notiId;
 	private int userId;
 	private int postId;
+	private int likeUid;
 	private String notification;
+	
+	public int getLikeUid() {
+		return likeUid;
+	}
+	public void setLikeUid(int likeUid) {
+		this.likeUid = likeUid;
+	}
 	public int getNotiId() {
 		return notiId;
 	}
