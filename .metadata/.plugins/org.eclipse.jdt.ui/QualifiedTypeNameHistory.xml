@@ -36,8 +36,10 @@
     <fullyQualifiedTypeName name="sdCommunity.user.notification.DTOlikePost"/>
     <fullyQualifiedTypeName name="java.lang.Long"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.MultipartConfig"/>
+    <fullyQualifiedTypeName name="sdCommunity.advUser.signup.userAdvDTO"/>
+    <fullyQualifiedTypeName name="sdCommunity.advUser.login.AdvUserLoginDTO"/>
     <fullyQualifiedTypeName name="sdCommunity.conn.Conn"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>

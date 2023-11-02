@@ -63,7 +63,14 @@ public class PostLike extends HttpServlet {
                  int like = likes +1;
                  response.getWriter().write("Liked (" + like+")");
              } else {
-                 response.getWriter().write("Already liked "+likes);
+            	 String unlike = "DELETE FROM postLike WHERE likeUid = ? and postId= ? and uid = ? ;";
+            	 PreparedStatement stm = connection.prepareStatement(unlike);
+            	 stm.setInt(1, likUid);
+            	 stm.setInt(2, postId);
+            	 stm.setInt(3, id);
+            	 int rowsDeleted = stm.executeUpdate();
+            	 int like = likes -1;
+                 response.getWriter().write("You disliked ("+like+")");
              }
          } catch (ClassNotFoundException | SQLException e) {
              e.printStackTrace(); // Handle the exception appropriately

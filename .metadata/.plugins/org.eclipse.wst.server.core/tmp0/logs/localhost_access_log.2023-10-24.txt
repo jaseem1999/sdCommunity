@@ -1,0 +1,7 @@
+127.0.0.1 - - [24/Oct/2023:21:08:56 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [24/Oct/2023:21:08:57 +0530] "GET /sdCommunity/ HTTP/1.1" 200 10417
+0:0:0:0:0:0:0:1 - - [24/Oct/2023:21:08:58 +0530] "GET /favicon.ico HTTP/1.1" 404 762
+0:0:0:0:0:0:0:1 - - [24/Oct/2023:21:09:02 +0530] "GET /sdCommunity/AdvLogin.jsp HTTP/1.1" 200 7029
+0:0:0:0:0:0:0:1 - - [24/Oct/2023:21:09:18 +0530] "POST /sdCommunity/AdvLoginServlet.jsp HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [24/Oct/2023:21:09:19 +0530] "GET /sdCommunity/AdvHome.jsp HTTP/1.1" 200 8134
+0:0:0:0:0:0:0:1 - - [24/Oct/2023:22:45:35 +0530] "GET /sdCommunity/css/img/User-profile.png HTTP/1.1" 404 799

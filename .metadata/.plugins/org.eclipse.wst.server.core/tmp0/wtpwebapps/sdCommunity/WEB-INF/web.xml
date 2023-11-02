@@ -175,6 +175,16 @@
     <url-pattern>/UAdd</url-pattern>
 </servlet-mapping>
 
+<servlet>
+    <servlet-name>proReq</servlet-name>
+    <servlet-class>sdCommunity.advUser.product.ProductRequestServley</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>proReq</servlet-name>
+    <url-pattern>/adsAdd</url-pattern>
+</servlet-mapping>
+
+
   
   
 </web-app>

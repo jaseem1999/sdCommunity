@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>sdCommunity</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+<servlet>
+    <servlet-name>profile</servlet-name>
+    <servlet-class>sdCommunity.user.profile.ProfileServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>profile</servlet-name>
+    <url-pattern>/Add</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>img</servlet-name>
+    <servlet-class>sdCommunity.user.profile.ProfileImage</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>img</servlet-name>
+    <url-pattern>/image</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Settings</servlet-name>
+    <servlet-class>sdCommunity.user.settings.SettingsAccessServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Settings</servlet-name>
+    <url-pattern>/settingsAccess</url-pattern>
+</servlet-mapping>
+
+
+
+ 
+ <servlet>
+    <servlet-name>Post</servlet-name>
+    <servlet-class>sdCommunity.user.post.UserPostServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Post</servlet-name>
+    <url-pattern>/postServlet</url-pattern>
+</servlet-mapping>
+  
+ <servlet>
+    <servlet-name>PostImage</servlet-name>
+    <servlet-class>sdCommunity.user.post.postImage</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>PostImage</servlet-name>
+    <url-pattern>/poimg</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>PostView</servlet-name>
+    <servlet-class>sdCommunity.user.post.ViewPostServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>PostView</servlet-name>
+    <url-pattern>/viewPost</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>comment</servlet-name>
+    <servlet-class>sdCommunity.user.comment.CommentServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>comment</servlet-name>
+    <url-pattern>/cmt</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>CommentData</servlet-name>
+    <servlet-class>sdCommunity.user.comment.CommentDataServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>CommentData</servlet-name>
+    <url-pattern>/CommentDataServt</url-pattern>
+</servlet-mapping>
+
+	
+<servlet>
+    <servlet-name>postLike</servlet-name>
+    <servlet-class>sdCommunity.user.post.PostLike</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>postLike</servlet-name>
+    <url-pattern>/Like</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>postSolution</servlet-name>
+    <servlet-class>sdCommunity.user.post.Solution</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>postSolution</servlet-name>
+    <url-pattern>/sol</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>verifySolution</servlet-name>
+    <servlet-class>sdCommunity.user.post.SolutionVerify</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>verifySolution</servlet-name>
+    <url-pattern>/Verify</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Follow</servlet-name>
+    <servlet-class>sdCommunity.user.follow.FollowServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Follow</servlet-name>
+    <url-pattern>/Followers</url-pattern>
+</servlet-mapping>
+  
+
+
+<servlet>
+    <servlet-name>postDelete</servlet-name>
+    <servlet-class>sdCommunity.user.post.DeleteServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>postDelete</servlet-name>
+    <url-pattern>/pd</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Number</servlet-name>
+    <servlet-class>sdCommunity.user.settings.NumberChangeServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Number</servlet-name>
+    <url-pattern>/cNumber</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Password</servlet-name>
+    <servlet-class>sdCommunity.user.settings.PasswordChangeServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Password</servlet-name>
+    <url-pattern>/cPass</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Email</servlet-name>
+    <servlet-class>sdCommunity.user.settings.EmailChangeServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Email</servlet-name>
+    <url-pattern>/cEmail</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>Name</servlet-name>
+    <servlet-class>sdCommunity.user.settings.NameChangeServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Name</servlet-name>
+    <url-pattern>/cName</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>Uprofile</servlet-name>
+    <servlet-class>sdCommunity.user.profile.ProfileUpdateServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Uprofile</servlet-name>
+    <url-pattern>/UAdd</url-pattern>
+</servlet-mapping>
+
+  
+  
+</web-app>
