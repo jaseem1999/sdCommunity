@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="sdCommunity.advUser.product.ProductDTO"%>
+<%@page import="sdCommunity.advUser.product.ReqProduct"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -16,6 +19,10 @@ long num=(Long)session.getAttribute("num");
 <title>sdCommunity Developed For agency <%=agName %></title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="//cdn.amcharts.com/lib/4/core.js"></script>
+<script src="//cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="//cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
 
 <style type="text/css">
 a {
@@ -104,6 +111,8 @@ a {
 #center{
 	text-align: center;
 }
+
+
 </style>
 </head>
 <body>
@@ -225,6 +234,38 @@ a {
   </div>
 </div>
 
+
+
+<h4 style="margin-top: 50px;">Ads Requested</h4>
+<table class="table table-striped">
+ <tr>
+ 	<th>Product</th>
+ 	<th>Image</th>
+ 	<th>Company</th>
+ 	<th>Description</th>
+ 	<th>price</th>
+ 	<th>Offer</th>
+ 	<th>Status</th>
+ </tr>
+ <%
+ 	response.setContentType("text/html");
+ 	List<ProductDTO> rp= ReqProduct.allReqProduct();
+ 	for(ProductDTO pr1 : rp ){
+ %>
+
+  <tr>
+  	<td><%=pr1.getName() %></td>
+  	<td><img src="adsImgPr?id=<%=pr1.getPid()%>" alt="" width="200px" /></td>
+  	<td><%=pr1.getCompany() %></td>
+  	<td><%=pr1.getDesc() %></td>
+  	<td><%=pr1.getPrice() %></td>
+  	<td><%=pr1.getOffer() %></td>
+  	<td class="table-success">Processing</td>
+  </tr>
+
+ <% } %>
+</table>
+
 </div>
 
 <script type="text/javascript">
@@ -240,8 +281,8 @@ function displayImage() {
 	return;
 	}
 
-	if (file.size > 55 * 1024) { // Check if image size is greater than 200KB
-	document.getElementById("imgError").innerHTML = "Please update image size lesthan 55kb";
+	if (file.size > 1024 * 1024) { // Check if image size is greater than 200KB
+	document.getElementById("imgError").innerHTML = "Please update image size lesthan 1024kb";
 	input.value = ""; // Clear the input field
 	img.src = "./css/img/User-profile.png"; // Set default image source
 	return;
@@ -310,6 +351,7 @@ function validateForm() {
 
     return true;
 }
+
 
 
 </script>

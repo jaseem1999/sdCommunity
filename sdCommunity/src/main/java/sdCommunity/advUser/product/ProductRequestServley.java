@@ -82,6 +82,7 @@ public class ProductRequestServley extends HttpServlet {
 
             if (rowsAffected > 0) {
                 System.out.println("Insert successful.");
+                response.sendRedirect("AdvHome.jsp");
             } else {
                 System.out.println("Insert failed.");
             }

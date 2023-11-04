@@ -184,6 +184,14 @@
     <url-pattern>/adsAdd</url-pattern>
 </servlet-mapping>
 
+<servlet>
+    <servlet-name>proReqImg</servlet-name>
+    <servlet-class>sdCommunity.advUser.product.ReqProImg</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>proReqImg</servlet-name>
+    <url-pattern>/adsImgPr</url-pattern>
+</servlet-mapping>
 
   
   
