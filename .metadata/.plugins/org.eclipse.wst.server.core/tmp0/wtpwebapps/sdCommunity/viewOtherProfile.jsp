@@ -272,6 +272,7 @@ a{
 		 			out.print("<span class='smallAbout' style='font-size: small;'>("+onationality+"),("+ogender+")</span><br> ");
 		 		
 			%>
+	
 			</div>
 			
 			<%
@@ -280,6 +281,57 @@ a{
 				
 			%>
 			<a href="userConnection.jsp?id=<%=ouid%>">Connections</a>
+			<div>
+				<button style="background: transparent; color: white;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+						 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+								  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+								</svg>
+					</button>
+					<ul class="dropdown-menu" style="min-width: 340px;">
+						        <li><a class="dropdown-item"data-bs-toggle="modal" data-bs-target="#exampleModalReport">Report</a></li>
+						        <li><a class="dropdown-item" href="#">Reject</a></li>
+				    </ul>
+				    <div class="modal fade" id="exampleModalReport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: black;">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h1 class="modal-title fs-5" id="exampleModalLabel">Reporting user <%=ofname %></h1>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					        <form action="usrRp" method="post">
+					        <div class="mb-3">
+							    <label for="exampleInputUid" class="form-label">your id</label>
+							    <input type="text" class="form-control" id="exampleInputUid" name="uid" value="<%=id%>" aria-describedby="emailHelp">
+							  </div>
+					           <div class="mb-3">
+							    <label for="exampleInputReUid" class="form-label">ID of the user</label>
+							    <input type="text" class="form-control" id="exampleInputReUid" name="reUid" value="<%=ouid%>" aria-describedby="emailHelp">
+							  </div>
+							  <div class="mb-3">
+							    <label for="exampleInputEmail1" class="form-label">Email address of the user</label>
+							    <input type="email" class="form-control" id="exampleInputEmail1" name="reEmail" value="<%=oemail%>" aria-describedby="emailHelp">
+							  </div>
+							  <div class="mb-3">
+							    <label for="exampleInputReName" class="form-label">Name of the user</label>
+							    <input type="text" class="form-control" id="exampleInputReName" name="reName" value="<%=ofname%> <%=olname%>" aria-describedby="emailHelp">
+							  </div>
+							  <div class="mb-3">
+							    <label for="exampleInputReport" class="form-label">Why you reporting this user</label>
+							    <input type="text" class="form-control" id="exampleInputReport" name="report"  aria-describedby="emailHelp" required="required">
+							  </div>
+							  
+							  <button type="submit" class="btn btn-primary">Submit</button>
+							</form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					  
+					      </div>
+					    </div>
+					  </div>
+					</div>
+			</div>
 			<hr>
 		</div>
 		<div class="col">

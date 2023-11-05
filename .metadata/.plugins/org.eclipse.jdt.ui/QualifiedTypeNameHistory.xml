@@ -9,7 +9,6 @@
     <fullyQualifiedTypeName name="java.io.OutputStream"/>
     <fullyQualifiedTypeName name="com.mysql.cj.jdbc.Blob"/>
     <fullyQualifiedTypeName name="javax.servlet.SessionCookieConfig"/>
-    <fullyQualifiedTypeName name="com.mysql.cj.Session"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="javax.servlet.http.Part"/>
     <fullyQualifiedTypeName name="sdCommunity.user.post.DTOpost"/>
@@ -18,7 +17,6 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-    <fullyQualifiedTypeName name="com.mysql.cj.xdevapi.Statement"/>
     <fullyQualifiedTypeName name="com.mysql.cj.xdevapi.JsonArray"/>
     <fullyQualifiedTypeName name="java.lang.ClassNotFoundException"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
@@ -26,7 +24,6 @@
     <fullyQualifiedTypeName name="sdCommunity.user.post.DTOSolution"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="sdCommunity.user.details.DTOusers"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="sdCommunity.user.details.DTOFollower"/>
     <fullyQualifiedTypeName name="sdCommunity.user.details.DAODetails"/>
     <fullyQualifiedTypeName name="sdCommunity.user.notification.DTOnotification"/>
@@ -36,13 +33,20 @@
     <fullyQualifiedTypeName name="sdCommunity.advUser.login.AdvUserLoginDTO"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.MultipartConfig"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="java.sql.SQLException"/>
     <fullyQualifiedTypeName name="sdCommunity.advUser.product.ProductDTO"/>
     <fullyQualifiedTypeName name="sdCommunity.admin.login.AdminLogin"/>
+    <fullyQualifiedTypeName name="sdCommunity.admin.user.UserDTO"/>
+    <fullyQualifiedTypeName name="com.mysql.cj.xdevapi.Statement"/>
+    <fullyQualifiedTypeName name="java.beans.Statement"/>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="sdCommunity.admin.user.OneUserDTO"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="sdCommunity.admin.user.ReportDTO"/>
     <fullyQualifiedTypeName name="sdCommunity.conn.Conn"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="sdCommunity.admin.user.UserDTO"/>
+    <fullyQualifiedTypeName name="com.mysql.cj.Session"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
 </qualifiedTypeNameHistroy>

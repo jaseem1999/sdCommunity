@@ -25,6 +25,10 @@
 	int postId = 0;
 	Integer like= 0;
 	
+	if(email == null){
+		response.sendRedirect("index.jsp?message=UnauthorizedAccess");
+	}
+	
 %>
 
 <meta charset="ISO-8859-1">

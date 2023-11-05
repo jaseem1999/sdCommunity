@@ -192,6 +192,31 @@
     <servlet-name>proReqImg</servlet-name>
     <url-pattern>/adsImgPr</url-pattern>
 </servlet-mapping>
+<servlet>
+    <servlet-name>userReport</servlet-name>
+    <servlet-class>sdCommunity.admin.user.UserReportServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>userReport</servlet-name>
+    <url-pattern>/usrRp</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>Re</servlet-name>
+    <servlet-class>sdCommunity.admin.user.UserReportRejectServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Re</servlet-name>
+    <url-pattern>/reject</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>acp</servlet-name>
+    <servlet-class>sdCommunity.admin.user.UserReportAcceptServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>acp</servlet-name>
+    <url-pattern>/acptRept</url-pattern>
+</servlet-mapping>
+
 
   
   

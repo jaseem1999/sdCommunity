@@ -143,4 +143,80 @@ public class UserDAO {
 		
 		return 0;
 	}
+	
+	public static List<ReportDTO> userReportOtherUser(){
+		ArrayList<ReportDTO> rl = new ArrayList<ReportDTO>();
+		Conn conn = new Conn();
+		Connection connection = conn.connection;
+		String sql = "select id,rid,email,name,report,tid from userReport where status is null;";
+		
+		try {
+			PreparedStatement stm =connection.prepareStatement(sql);
+			ResultSet rs=stm.executeQuery();
+			while(rs.next()) {
+				ReportDTO rd = new ReportDTO();
+				rd.setId(rs.getInt(1));
+				rd.setRid(rs.getInt(2));
+				rd.setEmail(rs.getString(3));
+				rd.setName(rs.getString(4));
+				rd.setReport(rs.getString(5));
+				rd.setTid(rs.getInt(6));
+				rl.add(rd);
+				
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return rl;
+	}
+	public static int totalReportOtherUser(){
+		int noUser =0;
+		Conn conn = new Conn();
+		Connection connection = conn.connection;
+		String sql = "select count(id) from userReport where status is null;";
+		try {
+			PreparedStatement stm =connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+            rs.next();
+            noUser = rs.getInt(1);
+			return noUser;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return noUser;
+	}
+	public static int totalReportRejectOtherUser(){
+		int noUser =0;
+		Conn conn = new Conn();
+		Connection connection = conn.connection;
+		String sql = "select count(id) from userReport where status='reject';";
+		try {
+			PreparedStatement stm =connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+            rs.next();
+            noUser = rs.getInt(1);
+			return noUser;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return noUser;
+	}
+	public static int totalReportAcceptOtherUser(){
+		int noUser =0;
+		Conn conn = new Conn();
+		Connection connection = conn.connection;
+		String sql = "select count(id) from userReport where status='accept';";
+		try {
+			PreparedStatement stm =connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+            rs.next();
+            noUser = rs.getInt(1);
+			return noUser;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return noUser;
+	}
 }

@@ -104,7 +104,14 @@
 	<div class="back-fist-part">	
 	<div class="container-xl">
   <!-- Content here -->
-
+  <%
+			String message = request.getParameter("message");
+			if (message != null && message.equals("UnauthorizedAccess")){
+				out.print("<div class='alert alert-danger' role='alert'>Unauthorized access</div>");
+			}else{
+				out.print("");
+			}
+%>
 	
 		<div class="row">
 	    	

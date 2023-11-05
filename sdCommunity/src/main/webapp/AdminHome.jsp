@@ -1,3 +1,4 @@
+<%@page import="sdCommunity.admin.user.ReportDTO"%>
 <%@page import="sdCommunity.admin.user.OneUserDTO"%>
 <%@page import="sdCommunity.admin.user.UserDAO"%>
 <%@page import="sdCommunity.admin.user.UserDTO"%>
@@ -9,7 +10,9 @@
 <head>
 <%
 String email = (String) session.getAttribute("AdminEmail");
-
+if(email == null){
+	response.sendRedirect("index.jsp?message=UnauthorizedAccess");
+}
 %>
 <meta charset="ISO-8859-1">
 <title>Admin sdCommunity</title>
@@ -103,13 +106,19 @@ String email = (String) session.getAttribute("AdminEmail");
 		  overflow-y: auto;
 		  padding: 20px;
 	}
+	.scroll2 {
+	     width: 108%;
+   		 height: 300px;
+    	overflow-x: hidden;
+    	overflow-y: auto;
+	}
 	
 	.chart {
-    max-width: 400px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    position: relative;
-    top: 379px;
+    	max-width: 130px;
+    	margin: 0;
+	    border: 1px solid #ccc;
+	    position: relative;
+	    top: 235px;
   }
 
   .bar {
@@ -304,7 +313,7 @@ String email = (String) session.getAttribute("AdminEmail");
 							</button>
 							<ul class="dropdown-menu" style="min-width: 340px;">
 						        <li><a class="dropdown-item" href="viewOtherProfile.jsp?id=<%=user.getUid()%>">View</a></li>
-						        <li><a class="dropdown-item" href="#">Edit</a></li>
+						        <li><button class="dropdown-item" id="myId" data-bs-toggle="modal" data-bs-target="#userEditModal" onclick="openEditModal('<%=user.getUid()%>')">Edit</button></li>
 						        <li>
 						        <%
 						        if(statusUser == null){
@@ -320,17 +329,76 @@ String email = (String) session.getAttribute("AdminEmail");
 					 <%} %>
 				</table>
 			</div>
+			<div class="modal fade" id="userEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        ...
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">Save changes</button>
+			      </div>
+			    </div>
+			  </div>
 		</div>
+		</div>
+	   <div class="col-3">
+	   		<div style="font-weight: 600!important;">Users Report other users <br><span style="color: #3498db; font-size: 15px;"><%=UserDAO.totalReportOtherUser()%> Pending reports </span><br>
+				<span style="color: #27ae60;; font-size: 15px;"><%=UserDAO.totalReportAcceptOtherUser()%> Accepted</span><br>
+				<span style="color: #e74c3c; font-size: 15px;"><%=UserDAO.totalReportRejectOtherUser()%> Rejected</span><br>
+			<hr></div>
+			<div class="scroll2" style="border: 1px solid gray; border-radius: 10px;">
+	   		<table class="table table-striped" style="margin: 2px;" >
+	   		<%
+	   			List<ReportDTO> rpu = UserDAO.userReportOtherUser();
+	   			for(ReportDTO ird : rpu){
+	   				
+	   		%>
+	   		  <tr>
+	   			<td>
+	   				<img src="image?id=<%=ird.getId()%>" alt="profile" width="40px" style="border: 2px solid #0355f6; border-radius: 50%;">
+	   			</td>
+	   			<td>
+	   				This user <%=ird.getName() %> email is <%=ird.getEmail() %> and id <%=ird.getRid() %> is doing <%=ird.getReport() %>
+	   			</td>
+	   			<td>
+	   				<button style="background: transparent; color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+						 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+								  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+								</svg>
+					</button>
+					<ul class="dropdown-menu" style="min-width: 340px;">
+						        <li><form class="dropdown-item" action="acptRept" method="post">
+						        	<input type="text" name="tid" value="<%=ird.getTid()%>" />
+						        	<input type="submit" value="accept">
+						        </form></li>
+						        <li><form class="dropdown-item" action="reject" method="post">
+						        	<input type="text" name="tid" value="<%=ird.getTid()%>" />
+						        	<input type="submit" value="reject">
+						        </form></li>
+				    </ul>
+	   			</td>
+	   		   </tr>
+	   		  <%} %>
+	   		</table>
+	   		</div>
+	   </div>
+	</div>
+	<div class="row">
 		<div class="col">
 			<div class="chart">
-    <div class="bar" style="height: <%=UserDAO.totalUser() * 10%>px;"><%=UserDAO.totalUser() %></div>
-    <div class="bar active" style="height: <%=(UserDAO.totalUser() - UserDAO.totalBlockedUser()) * 10%>px; left: 40px;"><%=UserDAO.totalUser() - UserDAO.totalBlockedUser()%></div>
-    <div class="bar blocked" style="height: <%=UserDAO.totalBlockedUser() * 10%>px; left: 80px;"><%=UserDAO.totalBlockedUser() %></div>
-  </div>
-  <div class="label" style="width: 100px; height: 30px;color: white; background: #3498db; margin-top: 5px;">Registered</div>
-  <div class="label" style="width: 100px; height: 30px;color: white; background: #27ae60; margin-top: 5px;">Active</div>
-  <div class="label" style="width: 100px; height: 30px;color: white; background: #e74c3c; margin-top: 5px;">Blocked</div>
-			 
+			    <div class="bar" style="height: <%=UserDAO.totalUser() * 10%>px;"><%=UserDAO.totalUser() %></div>
+			    <div class="bar active" style="height: <%=(UserDAO.totalUser() - UserDAO.totalBlockedUser()) * 10%>px; left: 40px;"><%=UserDAO.totalUser() - UserDAO.totalBlockedUser()%></div>
+			    <div class="bar blocked" style="height: <%=UserDAO.totalBlockedUser() * 10%>px; left: 80px;"><%=UserDAO.totalBlockedUser() %></div>
+  			</div>
+			  <div class="label" style="width: 100px; height: 30px;color: white; background: #3498db; margin-top: 5px;">Registered</div>
+			  <div class="label" style="width: 100px; height: 30px;color: white; background: #27ae60; margin-top: 5px;">Active</div>
+			  <div class="label" style="width: 100px; height: 30px;color: white; background: #e74c3c; margin-top: 5px;">Blocked</div>
 	   </div>
 	</div>
 	</div>
@@ -339,6 +407,12 @@ function searchByEmail() {
     var email = document.getElementById('searchInputEmail').value;
     window.location.href = 'BasedUserEmail.jsp?email=' + email;
 }
+
+function openEditModal(userId) {
+    // Update the modal with the user ID
+    document.querySelector('.modal-title').textContent = 'Editing User ID: ' + userId;
+}
+
 </script>
 </body>
 </html>
