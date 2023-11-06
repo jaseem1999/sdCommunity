@@ -1,3 +1,7 @@
+<%@page import="sdCommunity.user.details.DAODetails"%>
+<%@page import="sdCommunity.user.details.DAOuser"%>
+<%@page import="sdCommunity.admin.user.PostDAO"%>
+<%@page import="sdCommunity.admin.user.ReqPostBlock"%>
 <%@page import="sdCommunity.admin.user.ReportDTO"%>
 <%@page import="sdCommunity.admin.user.OneUserDTO"%>
 <%@page import="sdCommunity.admin.user.UserDAO"%>
@@ -71,7 +75,13 @@ if(email == null){
 .hide {
   display: none;
 }
-
+.admin{
+	    margin-bottom: 30px;
+    text-align: center;
+    font-size: larger;
+    font-weight: 700;
+    color: red;
+}
 
 
 
@@ -112,23 +122,13 @@ if(email == null){
     	overflow-x: hidden;
     	overflow-y: auto;
 	}
-	
-	.chart {
-    	max-width: 130px;
-    	margin: 0;
-	    border: 1px solid #ccc;
-	    position: relative;
-	    top: 235px;
-  }
+	.scroll3 {
+	     width: 100%;
+   		 height: 300px;
+    	overflow-x: hidden;
+    	overflow-y: auto;
+	}
 
-  .bar {
-    display: inline-block;
-    width: 30px;
-    margin-right: 10px;
-    background-color: #3498db;
-    position: absolute;
-    bottom: 0;
-  }
 
   .active {
     background-color: #27ae60;
@@ -138,9 +138,25 @@ if(email == null){
     background-color: #e74c3c;
   }
 
+  
+  .pie-chart-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-image: conic-gradient(green <%=UserDAO.totalBlockedUser()*10%>deg, red <%=UserDAO.totalBlockedUser()*10%>deg <%=UserDAO.totalUser()*10%>deg, green <%=UserDAO.totalUser()*10%>deg);
+  }
   .label {
-    text-align: center;
-  }	
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+  }
+  #center{
+  	text-align: center;
+  }
 </style>
 </head>
 <body>
@@ -156,7 +172,7 @@ if(email == null){
 
         <div class="nav__link hide">
           <a href="#">home</a>
-          <a href="#">Logout</a>
+          <a href="AdminLoginOut.jsp">Logout</a>
           <a class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
           	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
   				<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
@@ -177,6 +193,8 @@ if(email == null){
 	
 	<div class="container">
 	<div class="row" style="margin-top: 50px;">
+		<div class="admin">sdCommunity administrator do not share your login information</div>
+		<hr>
 		<div class="col" >
 			<div style="font-weight: 600!important;">Users of sdCommunity<br><span style="color: #3498db; font-size: 15px;"><%=UserDAO.totalUser()%> registered user</span>
 				<span style="color: #27ae60;; font-size: 15px; margin: 20px;"><%=UserDAO.totalUser() - UserDAO.totalBlockedUser()%> Active user</span>
@@ -312,8 +330,8 @@ if(email == null){
 								</svg>
 							</button>
 							<ul class="dropdown-menu" style="min-width: 340px;">
-						        <li><a class="dropdown-item" href="viewOtherProfile.jsp?id=<%=user.getUid()%>">View</a></li>
-						        <li><button class="dropdown-item" id="myId" data-bs-toggle="modal" data-bs-target="#userEditModal" onclick="openEditModal('<%=user.getUid()%>')">Edit</button></li>
+						        <li><a class="dropdown-item" href="AdminViewUser.jsp?id=<%=user.getUid()%>">View</a></li>
+						        <li><a class="dropdown-item" href="AdminEditUserProfile.jsp?id=<%=user.getUid()%>">Edit</a></li>
 						        <li>
 						        <%
 						        if(statusUser == null){
@@ -323,29 +341,23 @@ if(email == null){
 						 		}
 						        %>
 						        </li>
+						        <li>
+						        	<label style="margin-left: 18px;" for="activities">Activities</label>
+									<select style="margin-left: 5px;background: gainsboro; border-radius: 8px; padding: 4px;" id="activities" name="activities" onchange="window.location.href=this.value">
+									  <option value="AdminViewUser.jsp?id=<%=user.getUid()%>">View</option>
+									  <option value="AdminPostView.jsp?id=<%=user.getUid()%>">Posts</option>
+									  <option value="#">Comments</option>
+									  <option value="#">Solutions</option>
+									</select>
+						        </li>
 						      </ul>
 					 	</td>
 					 </tr>
 					 <%} %>
 				</table>
 			</div>
-			<div class="modal fade" id="userEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      <div class="modal-body">
-			        ...
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-primary">Save changes</button>
-			      </div>
-			    </div>
-			  </div>
-		</div>
+			
+		
 		</div>
 	   <div class="col-3">
 	   		<div style="font-weight: 600!important;">Users Report other users <br><span style="color: #3498db; font-size: 15px;"><%=UserDAO.totalReportOtherUser()%> Pending reports </span><br>
@@ -389,18 +401,130 @@ if(email == null){
 	   		</div>
 	   </div>
 	</div>
-	<div class="row">
+	<div class="row" style="margin: 30px;">
 		<div class="col">
-			<div class="chart">
-			    <div class="bar" style="height: <%=UserDAO.totalUser() * 10%>px;"><%=UserDAO.totalUser() %></div>
-			    <div class="bar active" style="height: <%=(UserDAO.totalUser() - UserDAO.totalBlockedUser()) * 10%>px; left: 40px;"><%=UserDAO.totalUser() - UserDAO.totalBlockedUser()%></div>
-			    <div class="bar blocked" style="height: <%=UserDAO.totalBlockedUser() * 10%>px; left: 80px;"><%=UserDAO.totalBlockedUser() %></div>
-  			</div>
-			  <div class="label" style="width: 100px; height: 30px;color: white; background: #3498db; margin-top: 5px;">Registered</div>
-			  <div class="label" style="width: 100px; height: 30px;color: white; background: #27ae60; margin-top: 5px;">Active</div>
-			  <div class="label" style="width: 100px; height: 30px;color: white; background: #e74c3c; margin-top: 5px;">Blocked</div>
-	   </div>
+			<div style="font-weight: 600!important;">Users Report others post <br><span style="color: #3498db; font-size: 15px;"><%=UserDAO.totalReportOtherPost()%> Pending reports </span><br>
+				<span style="color: #27ae60;; font-size: 15px;"><%=UserDAO.totalReportAcceptOtherPost()%> Accepted</span><br>
+				<span style="color: #e74c3c; font-size: 15px;"><%=UserDAO.totalReportRejectOtherPost()%> Rejected</span><br>
+			<hr></div>
+			<div class="scroll3" style="border: 1px solid gray; border-radius: 10px;">
+				<table class="table table-striped" style="margin: 2px;">
+					<%
+					List<ReqPostBlock> rpbs = PostDAO.allBlockPostReq();
+					for(ReqPostBlock rpb : rpbs){
+					%>
+					<tr>
+						<td><img src="image?id=<%=rpb.getId()%>" alt="profile" width="40px" style="border: 2px solid #0355f6; border-radius: 50%;"></td>
+						<td>this member( <%=DAODetails.name(rpb.getUid())%> ) is posting(post id =<%=rpb.getPostId() %> ) Un-ethical <br> User email :: <%=DAODetails.emai(rpb.getUid()) %></td>
+						<td>
+							<button style="background: transparent; color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+						 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+								  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+								</svg>
+							</button>
+							<ul class="dropdown-menu" style="min-width: 340px;">
+								        <li><form class="dropdown-item" action="acptPostReport" method="post">
+								        	<input type="text" name="tid" value="<%=rpb.getTid()%>" />
+								        	<input type="submit" value="accept">
+								        </form></li>
+								        <li><form class="dropdown-item" action="rejectPostReport" method="post">
+								        	<input type="text" name="tid" value="<%=rpb.getTid()%>" />
+								        	<input type="submit" value="reject">
+								        </form></li>
+						    </ul>
+						</td>
+					</tr>
+					
+					<%} %>
+				</table>
+			</div>
+		</div>
+		<div class="col">
+		
+		
+		<div style="font-weight: 600!important;">Users Report others solution (pending work) <br><span style="color: #3498db; font-size: 15px;"><%=UserDAO.totalReportOtherPost()%> Pending reports </span><br>
+				<span style="color: #27ae60;; font-size: 15px;"><%=UserDAO.totalReportAcceptOtherPost()%> Accepted</span><br>
+				<span style="color: #e74c3c; font-size: 15px;"><%=UserDAO.totalReportRejectOtherPost()%> Rejected</span><br>
+			<hr></div>
+			<div class="scroll3" style="border: 1px solid gray; border-radius: 10px;">
+				<table class="table table-striped" style="margin: 2px;">
+					<%
+					List<ReqPostBlock> rpbss = PostDAO.allBlockPostReq();
+					for(ReqPostBlock rpb : rpbss){
+					%>
+					<tr>
+						<td><img src="image?id=<%=rpb.getId()%>" alt="profile" width="40px" style="border: 2px solid #0355f6; border-radius: 50%;"></td>
+						<td>this member( <%=DAODetails.name(rpb.getUid())%> ) is posting(post id =<%=rpb.getPostId() %> ) Un-ethical <br> User email :: <%=DAODetails.emai(rpb.getUid()) %></td>
+						<td>
+							<button style="background: transparent; color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+						 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+								  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+								</svg>
+							</button>
+							<ul class="dropdown-menu" style="min-width: 340px;">
+								        <li><form class="dropdown-item" action="acptPostReport" method="post">
+								        	<input type="text" name="tid" value="<%=rpb.getTid()%>" />
+								        	<input type="submit" value="accept">
+								        </form></li>
+								        <li><form class="dropdown-item" action="rejectPostReport" method="post">
+								        	<input type="text" name="tid" value="<%=rpb.getTid()%>" />
+								        	<input type="submit" value="reject">
+								        </form></li>
+						    </ul>
+						</td>
+					</tr>
+					
+					<%} %>
+				</table>
+			</div>
+		
+		
+		
+		</div>
+		<div class="col">
+		
+		
+		
+		<div style="font-weight: 600!important;">Users Report others comments (pending work) <br><span style="color: #3498db; font-size: 15px;"><%=UserDAO.totalReportOtherPost()%> Pending reports </span><br>
+				<span style="color: #27ae60;; font-size: 15px;"><%=UserDAO.totalReportAcceptOtherPost()%> Accepted</span><br>
+				<span style="color: #e74c3c; font-size: 15px;"><%=UserDAO.totalReportRejectOtherPost()%> Rejected</span><br>
+			<hr></div>
+			<div class="scroll3" style="border: 1px solid gray; border-radius: 10px;">
+				<table class="table table-striped" style="margin: 2px;">
+					<%
+					List<ReqPostBlock> rpbssss = PostDAO.allBlockPostReq();
+					for(ReqPostBlock rpb : rpbssss){
+					%>
+					<tr>
+						<td><img src="image?id=<%=rpb.getId()%>" alt="profile" width="40px" style="border: 2px solid #0355f6; border-radius: 50%;"></td>
+						<td>this member( <%=DAODetails.name(rpb.getUid())%> ) is posting(post id =<%=rpb.getPostId() %> ) Un-ethical <br> User email :: <%=DAODetails.emai(rpb.getUid()) %></td>
+						<td>
+							<button style="background: transparent; color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+						 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+								  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+								</svg>
+							</button>
+							<ul class="dropdown-menu" style="min-width: 340px;">
+								        <li><form class="dropdown-item" action="acptPostReport" method="post">
+								        	<input type="text" name="tid" value="<%=rpb.getTid()%>" />
+								        	<input type="submit" value="accept">
+								        </form></li>
+								        <li><form class="dropdown-item" action="rejectPostReport" method="post">
+								        	<input type="text" name="tid" value="<%=rpb.getTid()%>" />
+								        	<input type="submit" value="reject">
+								        </form></li>
+						    </ul>
+						</td>
+					</tr>
+					
+					<%} %>
+				</table>
+			</div>
+		
+		
+		</div>
 	</div>
+	<hr>
 	</div>
 <script type="text/javascript">
 function searchByEmail() {
@@ -411,6 +535,7 @@ function searchByEmail() {
 function openEditModal(userId) {
     // Update the modal with the user ID
     document.querySelector('.modal-title').textContent = 'Editing User ID: ' + userId;
+    document.querySelector('.id').value = userId;
 }
 
 </script>

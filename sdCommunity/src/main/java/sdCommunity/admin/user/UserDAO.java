@@ -219,4 +219,88 @@ public class UserDAO {
 		}
 		return noUser;
 	}
+	
+		public static OneUserDTO ude = new OneUserDTO();
+		public static List<OneUserDTO> getUsers(int id){
+			ArrayList<OneUserDTO> li = new ArrayList<OneUserDTO>();
+			Conn conn = new Conn();
+			Connection connection = conn.connection;
+			String sql = "select u.userId, u.fname,u.lname,u.email,u.password,u.number, ui.about,ui.company, ui.college,ui.position,ui.github,ui.linkedin,ui.website,ui.nationality,ui.gender,u.status from user u join user_info ui on u.userId = ui.uid where u.userId ="+id+";";
+			try {
+				PreparedStatement stm =connection.prepareStatement(sql);
+				ResultSet rs=stm.executeQuery();
+				while(rs.next()) {
+					
+					ude.setUid(rs.getInt(1));
+					ude.setFname(rs.getString(2));
+					ude.setLname(rs.getString(3));
+					ude.setEmail(rs.getString(4));
+					ude.setPass(rs.getString(5));
+					ude.setNumber(rs.getLong(6));
+					ude.setAbout(rs.getString(7));
+					ude.setCompany(rs.getString(8));
+					ude.setCollege(rs.getString(9));
+					ude.setPosition(rs.getString(10));
+					ude.setGithub(rs.getString(11));
+					ude.setLinkedin(rs.getString(12));
+					ude.setWebsite(rs.getString(13));
+					ude.setNationality(rs.getString(14));
+					ude.setGender(rs.getString(15));
+					ude.setStatus(rs.getString(16));
+					li.add(ude);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			return li;
+		}
+		public static int totalReportOtherPost(){
+			int noUser =0;
+			Conn conn = new Conn();
+			Connection connection = conn.connection;
+			String sql = "select count(tid) from reqBlockPost where status is null;";
+			try {
+				PreparedStatement stm =connection.prepareStatement(sql);
+				ResultSet rs = stm.executeQuery();
+	            rs.next();
+	            noUser = rs.getInt(1);
+				return noUser;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return noUser;
+		}
+		public static int totalReportRejectOtherPost(){
+			int noUser =0;
+			Conn conn = new Conn();
+			Connection connection = conn.connection;
+			String sql = "select count(tid) from reqBlockPost where status='reject';";
+			try {
+				PreparedStatement stm =connection.prepareStatement(sql);
+				ResultSet rs = stm.executeQuery();
+	            rs.next();
+	            noUser = rs.getInt(1);
+				return noUser;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return noUser;
+		}
+		public static int totalReportAcceptOtherPost(){
+			int noUser =0;
+			Conn conn = new Conn();
+			Connection connection = conn.connection;
+			String sql = "select count(tid) from reqBlockPost where status='accept';";
+			try {
+				PreparedStatement stm =connection.prepareStatement(sql);
+				ResultSet rs = stm.executeQuery();
+	            rs.next();
+	            noUser = rs.getInt(1);
+				return noUser;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return noUser;
+		}
 }

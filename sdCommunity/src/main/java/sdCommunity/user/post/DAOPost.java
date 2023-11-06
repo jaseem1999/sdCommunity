@@ -276,4 +276,57 @@ public class DAOPost {
 		}
 		return count;
 	}
+	public static List<DTOothers> getOtherProfilePost(int id) {
+		ArrayList<DTOothers> li = new ArrayList<DTOothers>();
+		Conn con= new Conn();
+		Connection conn =con.connection;
+		try {
+			String sql = "SELECT p.post_id, p.uid, u.fname, u.lname,u.email,u.number, ui.about,ui.company, ui.college,ui.position,ui.github,ui.linkedin,ui.website,ui.nationality,ui.gender, p.heading, p.link, p.post, p.codes, p.status FROM userPost p JOIN user u ON u.userId = p.uid JOIN user_info ui ON ui.uid = p.uid WHERE p.uid ="+id+";";
+			PreparedStatement stm =conn.prepareStatement(sql);
+			ResultSet rs=stm.executeQuery();
+			
+			while(rs.next()) {
+				DTOothers p= new DTOothers(); 
+				p.setPostId(rs.getInt(1));
+				p.setUid(rs.getInt(2));
+				p.setFname(rs.getString(3));
+				p.setLname(rs.getString(4));
+				p.setEmail(rs.getString(5));
+				p.setNum(rs.getLong(6));
+				p.setAbout(rs.getString(7));
+				p.setCompany(rs.getString(8));
+				p.setCollege(rs.getString(9));
+				p.setPosition(rs.getString(10));
+				p.setGithub(rs.getString(11));
+				p.setLinkedin(rs.getString(12));
+				p.setWebsite(rs.getString(13));
+				p.setNationality(rs.getString(14));
+				p.setGender(rs.getString(15));
+				p.setHeading(rs.getString(16));
+				p.setLink(rs.getString(17));
+				p.setPost(rs.getString(18));
+				p.setCode(rs.getString(19));
+				p.setStatus(rs.getString(20));
+				li.add(p);
+				
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return li;
+	}
+	public static int blockPost(int postId, int id,int pid) {
+		int rowsUpdated =0;
+		Conn con = new Conn();
+		Connection connection = con.connection;
+		try {
+			String sql="insert into reqBlockPost(postId,uid,postUID)value("+postId+","+id+","+pid+");";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			rowsUpdated = preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return rowsUpdated;
+ 	}
 }

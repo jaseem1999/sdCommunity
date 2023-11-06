@@ -20,6 +20,13 @@ public class DTOothers {
 	private String about;
 	private String nationality;
 	private String gender;
+	private String status;
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public int getPostId() {
 		return postId;
 	}

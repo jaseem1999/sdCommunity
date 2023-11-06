@@ -29,6 +29,27 @@ public class DAODetails {
 		String name = fname + " "+ lname;
 		return name;
 	}
+	
+	public static String emai(int id) {
+		String email = null;
+		Conn con= new Conn();
+		Connection conn =con.connection;
+		try {
+			String sql = "select email from user where userId="+id+";";
+			PreparedStatement stm =conn.prepareStatement(sql);
+			ResultSet rs=stm.executeQuery();
+			
+			while(rs.next()) {
+				email= rs.getString(1);	
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return email;
+	}
+	
 	public static String getPostHeading(int id) {
 		String Heading = null;
 		Conn con= new Conn();

@@ -217,6 +217,35 @@
     <url-pattern>/acptRept</url-pattern>
 </servlet-mapping>
 
+<servlet>
+    <servlet-name>acpPost</servlet-name>
+    <servlet-class>sdCommunity.admin.user.AcceptReportPostServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>acpPost</servlet-name>
+    <url-pattern>/acptPostReport</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>rejPost</servlet-name>
+    <servlet-class>sdCommunity.admin.user.RejectReportPostServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>rejPost</servlet-name>
+    <url-pattern>/rejectPostReport</url-pattern>
+</servlet-mapping>
+
+
+
+<servlet>
+    <servlet-name>up</servlet-name>
+    <servlet-class>sdCommunity.admin.user.UserPrimaryServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>up</servlet-name>
+    <url-pattern>/upe</url-pattern>
+</servlet-mapping>
+
 
   
   

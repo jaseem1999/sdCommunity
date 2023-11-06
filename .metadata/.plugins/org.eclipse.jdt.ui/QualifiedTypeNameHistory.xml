@@ -22,7 +22,6 @@
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="java.sql.DriverManager"/>
     <fullyQualifiedTypeName name="sdCommunity.user.post.DTOSolution"/>
-    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="sdCommunity.user.details.DTOusers"/>
     <fullyQualifiedTypeName name="sdCommunity.user.details.DTOFollower"/>
     <fullyQualifiedTypeName name="sdCommunity.user.details.DAODetails"/>
@@ -31,7 +30,6 @@
     <fullyQualifiedTypeName name="java.lang.Long"/>
     <fullyQualifiedTypeName name="sdCommunity.advUser.signup.userAdvDTO"/>
     <fullyQualifiedTypeName name="sdCommunity.advUser.login.AdvUserLoginDTO"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.MultipartConfig"/>
     <fullyQualifiedTypeName name="sdCommunity.advUser.product.ProductDTO"/>
     <fullyQualifiedTypeName name="sdCommunity.admin.login.AdminLogin"/>
@@ -41,12 +39,16 @@
     <fullyQualifiedTypeName name="java.sql.Statement"/>
     <fullyQualifiedTypeName name="java.sql.SQLException"/>
     <fullyQualifiedTypeName name="sdCommunity.admin.user.OneUserDTO"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="sdCommunity.admin.user.ReportDTO"/>
-    <fullyQualifiedTypeName name="sdCommunity.conn.Conn"/>
     <fullyQualifiedTypeName name="com.mysql.cj.Session"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.lang.LinkageError"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="sdCommunity.conn.Conn"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="sdCommunity.admin.user.ReqPostBlock"/>
 </qualifiedTypeNameHistroy>
