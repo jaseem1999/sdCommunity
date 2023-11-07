@@ -1,3 +1,5 @@
+<%@page import="sdCommunity.admin.user.SolutionDAO"%>
+<%@page import="sdCommunity.admin.user.SolutionReportDTO"%>
 <%@page import="sdCommunity.user.details.DAODetails"%>
 <%@page import="sdCommunity.user.details.DAOuser"%>
 <%@page import="sdCommunity.admin.user.PostDAO"%>
@@ -251,37 +253,40 @@ if(email == null){
 					 		}
 					 	%></td>
 					 	<td><%
-					 		if(uFind.getGender() != null){
-					 			out.print(uFind.getGender());
-					 		}else{
-					 			out.print("");
-					 		}
-					 	%></td>
-					 	<td><%
-					 		String statusUserS1 = uFind.getStatus();
-					 		if(statusUserS1 == null){
+						 	String OnestatusUser = uFind.getStatus();
+					 		if(OnestatusUser == null){
 					 			out.print("<span style='color: green'>Active</span>");
 					 		}else{
 					 			out.print("<span style='color: red'>Blocked</span>");
 					 		}
 					 	%></td>
 					 	<td>
-					 		<button style="background: transparent; color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-						 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-								  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-								</svg>
-							</button>
-							<ul class="dropdown-menu" style="min-width: 340px;">
-						        <li><a class="dropdown-item" href="viewOtherProfile.jsp?id=<%=uFind.getUid()%>">View</a></li>
-						        <li><a class="dropdown-item" href="#">Edit</a></li>
+					 			<button style="background: transparent; color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+								 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+										  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+										</svg>
+									</button>
+					 		<ul class="dropdown-menu" style="min-width: 340px;">
+						        <li><a class="dropdown-item" href="AdminViewUser.jsp?id=<%=uFind.getUid()%>">View</a></li>
+						        <li><a class="dropdown-item" href="AdminEditUserProfile.jsp?id=<%=uFind.getUid()%>">Edit</a></li>
 						        <li>
 						        <%
-						        if(statusUserS1 == null){
+						        if(OnestatusUser == null){
 						 			out.print("<a class='dropdown-item' href='AdminUserBlock.jsp?id=" + uFind.getUid() + "'>Block</a>");
 						 		}else{
 						 			out.print("<a class='dropdown-item' href='AdminUserUnblock.jsp?id=" + uFind.getUid() + "'>Unblock</a>");
 						 		}
 						        %>
+						        </li>
+						        <li>
+						        
+						        	<label style="margin-left: 18px;" for="activities">Activities</label>
+									<select style="margin-left: 5px;background: gainsboro; border-radius: 8px; padding: 4px;" id="activities" name="activities" onchange="window.location.href=this.value">
+									  <option value="AdminViewUser.jsp?id=<%=uFind.getUid()%>">View</option>
+									  <option value="AdminPostView.jsp?id=<%=uFind.getUid()%>">Posts</option>
+									  <option value="AdminCommentView.jsp?id=<%=uFind.getUid()%>">Comments</option>
+									  <option value="AdminSolutionView.jsp?id=<%=uFind.getUid()%>">Solutions</option>
+									</select>
 						        </li>
 						      </ul>
 					 	</td>
@@ -346,8 +351,8 @@ if(email == null){
 									<select style="margin-left: 5px;background: gainsboro; border-radius: 8px; padding: 4px;" id="activities" name="activities" onchange="window.location.href=this.value">
 									  <option value="AdminViewUser.jsp?id=<%=user.getUid()%>">View</option>
 									  <option value="AdminPostView.jsp?id=<%=user.getUid()%>">Posts</option>
-									  <option value="#">Comments</option>
-									  <option value="#">Solutions</option>
+									  <option value="AdminCommentView.jsp?id=<%=user.getUid()%>">Comments</option>
+									  <option value="AdminSolutionView.jsp?id=<%=user.getUid()%>">Solutions</option>
 									</select>
 						        </li>
 						      </ul>
@@ -442,19 +447,19 @@ if(email == null){
 		<div class="col">
 		
 		
-		<div style="font-weight: 600!important;">Users Report others solution (pending work) <br><span style="color: #3498db; font-size: 15px;"><%=UserDAO.totalReportOtherPost()%> Pending reports </span><br>
-				<span style="color: #27ae60;; font-size: 15px;"><%=UserDAO.totalReportAcceptOtherPost()%> Accepted</span><br>
-				<span style="color: #e74c3c; font-size: 15px;"><%=UserDAO.totalReportRejectOtherPost()%> Rejected</span><br>
+		<div style="font-weight: 600!important;">Users Report others solution (pending work) <br><span style="color: #3498db; font-size: 15px;"><%=SolutionDAO.selectedReportActiveSolution()%> Pending reports </span><br>
+				<span style="color: #27ae60;; font-size: 15px;"><%=SolutionDAO.selectedReportAcceptSolution()%> Accepted</span><br>
+				<span style="color: #e74c3c; font-size: 15px;"><%=SolutionDAO.selectedReportRejectSolution()%> Rejected</span><br>
 			<hr></div>
 			<div class="scroll3" style="border: 1px solid gray; border-radius: 10px;">
 				<table class="table table-striped" style="margin: 2px;">
 					<%
-					List<ReqPostBlock> rpbss = PostDAO.allBlockPostReq();
-					for(ReqPostBlock rpb : rpbss){
+					List<SolutionReportDTO> rpbss = SolutionDAO.getSolutionReports();
+					for(SolutionReportDTO rpb : rpbss){
 					%>
 					<tr>
-						<td><img src="image?id=<%=rpb.getId()%>" alt="profile" width="40px" style="border: 2px solid #0355f6; border-radius: 50%;"></td>
-						<td>this member( <%=DAODetails.name(rpb.getUid())%> ) is posting(post id =<%=rpb.getPostId() %> ) Un-ethical <br> User email :: <%=DAODetails.emai(rpb.getUid()) %></td>
+						<td><img src="image?id=<%=rpb.getUid()%>" alt="profile" width="40px" style="border: 2px solid #0355f6; border-radius: 50%;"></td>
+						<td>this member( <%=DAODetails.name(rpb.getSuid())%> ) is solution(solution id =<%=rpb.getSid() %> )<br> Un-ethical <br> User email :: <%=DAODetails.emai(rpb.getSuid()) %></td>
 						<td>
 							<button style="background: transparent; color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
 						 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -462,14 +467,12 @@ if(email == null){
 								</svg>
 							</button>
 							<ul class="dropdown-menu" style="min-width: 340px;">
-								        <li><form class="dropdown-item" action="acptPostReport" method="post">
-								        	<input type="text" name="tid" value="<%=rpb.getTid()%>" />
-								        	<input type="submit" value="accept">
-								        </form></li>
-								        <li><form class="dropdown-item" action="rejectPostReport" method="post">
-								        	<input type="text" name="tid" value="<%=rpb.getTid()%>" />
-								        	<input type="submit" value="reject">
-								        </form></li>
+								        <li>
+								        	<a style="margin: 5px;" class="btn btn-success" href="AcceptSolutionReport.jsp?id=<%=rpb.getSrId()%>">Accept</a>
+								        </li>
+								        <li>
+								        	<a style="margin: 5px;" class="btn btn-danger" href="RejectSolutionReport.jsp?id=<%=rpb.getSrId()%>">Reject</a>
+								        </li>
 						    </ul>
 						</td>
 					</tr>
@@ -483,43 +486,11 @@ if(email == null){
 		</div>
 		<div class="col">
 		
-		
-		
-		<div style="font-weight: 600!important;">Users Report others comments (pending work) <br><span style="color: #3498db; font-size: 15px;"><%=UserDAO.totalReportOtherPost()%> Pending reports </span><br>
-				<span style="color: #27ae60;; font-size: 15px;"><%=UserDAO.totalReportAcceptOtherPost()%> Accepted</span><br>
-				<span style="color: #e74c3c; font-size: 15px;"><%=UserDAO.totalReportRejectOtherPost()%> Rejected</span><br>
-			<hr></div>
-			<div class="scroll3" style="border: 1px solid gray; border-radius: 10px;">
-				<table class="table table-striped" style="margin: 2px;">
-					<%
-					List<ReqPostBlock> rpbssss = PostDAO.allBlockPostReq();
-					for(ReqPostBlock rpb : rpbssss){
-					%>
-					<tr>
-						<td><img src="image?id=<%=rpb.getId()%>" alt="profile" width="40px" style="border: 2px solid #0355f6; border-radius: 50%;"></td>
-						<td>this member( <%=DAODetails.name(rpb.getUid())%> ) is posting(post id =<%=rpb.getPostId() %> ) Un-ethical <br> User email :: <%=DAODetails.emai(rpb.getUid()) %></td>
-						<td>
-							<button style="background: transparent; color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-						 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-								  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-								</svg>
-							</button>
-							<ul class="dropdown-menu" style="min-width: 340px;">
-								        <li><form class="dropdown-item" action="acptPostReport" method="post">
-								        	<input type="text" name="tid" value="<%=rpb.getTid()%>" />
-								        	<input type="submit" value="accept">
-								        </form></li>
-								        <li><form class="dropdown-item" action="rejectPostReport" method="post">
-								        	<input type="text" name="tid" value="<%=rpb.getTid()%>" />
-								        	<input type="submit" value="reject">
-								        </form></li>
-						    </ul>
-						</td>
-					</tr>
-					
-					<%} %>
-				</table>
-			</div>
+		<div style="margin-left: 30px;" id="center">
+			<div class="pie-chart-container" >
+		    <div class="label"><%=UserDAO.totalUser()%></div>
+		  </div>
+		 </div>	
 		
 		
 		</div>

@@ -228,6 +228,11 @@ Integer like= 0;
 			if(message != null && message.equals("failedReqBlock")){
 				out.print("<div class='alert alert-danger' id='alert' role='alert'>Post Blocking request send success fully</div>");	
 			}
+			if(message != null && message.equals("solutionreportsuccss")){
+				out.print("<div class='alert alert-success' id='alert' role='alert'>Solution request send successfully</div>");	
+			}
+			
+			
 	%>
 	
 	<div class="container-xl hbdy" style="margin-top: 10px;">
@@ -393,6 +398,17 @@ Integer like= 0;
  					%>
  					
  					<span><%=name %> </span> 
+ 					<button style="background: white-space; color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+						 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+								  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+								</svg>
+							</button>
+							<ul class="dropdown-menu" style="min-width: 340px;">
+						
+						        <li>
+						  			<a class="btn btn-warning" href="reportUserSolution.jsp?id=<%=ps.getSid()%>&uid=<%=id%>&suid=<%=ps.getUid()%>">Report the solution</a>
+						        </li>
+						      </ul>
  					<form action="Verify" method="post">
  						<input type="hidden" name="suid" value="<%=suid%>">
     					<input type="hidden" name="sspid" value="<%=sspid%>">
@@ -440,6 +456,7 @@ Integer like= 0;
 									<p style="margin-left: 10px; margin-right: 5px" id="commentsDiv">
 									
 									</p>
+									
 									
 									
     							</div>

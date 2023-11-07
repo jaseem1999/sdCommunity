@@ -47,16 +47,21 @@ public class CommentDataServlet extends HttpServlet {
             Conn con = new Conn();
             conn = con.connection;
 
-            String sql = "SELECT comt_uid, comments FROM user_cmt where post_id="+id;
+            String sql = "SELECT comt_uid, comments, status FROM user_cmt where post_id="+id;
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
             List<String> commentsList = new ArrayList<>();
             while (resultSet.next()) {
+            	String status = resultSet.getString("status");
                 String commentText = resultSet.getString("comments");
                 String commentUiD = resultSet.getString("comt_uid");
                 String commentEntry = commentText + " (UID: " + commentUiD + ")";
-                commentsList.add(commentEntry);
+                if(status != null) {
+                	
+                }else {
+                	commentsList.add(commentEntry);
+                }
             }
 
             // Construct a JSON response manually

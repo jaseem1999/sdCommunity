@@ -135,6 +135,7 @@ public class UserDAO {
 				ud.setNationality(rs.getString(14));
 				ud.setGender(rs.getString(15));
 				ud.setStatus(rs.getString(16));
+				System.out.println(ud.getStatus());
 				return 1;
 			}
 		} catch (Exception e) {
