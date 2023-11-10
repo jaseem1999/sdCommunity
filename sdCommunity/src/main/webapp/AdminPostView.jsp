@@ -126,7 +126,7 @@ int id = Integer.parseInt(idString);
         </div>
 
         <div class="nav__link hide">
-          <a href="#">home</a>
+          <a href="AdminHome.jsp">home</a>
           <a href="AdminLoginOut.jsp">Logout</a>
           <a class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
           	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
@@ -137,6 +137,16 @@ int id = Integer.parseInt(idString);
       </nav>
  	</header>
  	<div class="container" style="margin-top: 50px;">
+ 	<%
+ 	String message = request.getParameter("message");
+	if (message != null && message.equals("success")){
+		out.print("<div class='alert alert-success'id='alert' role='alert'>User blocked Successfuly</div>");
+	}else if(message != null && message.equals("successBlocked")){
+		out.print("<div class='alert alert-success' id='alert' role='alert'>User unblocked successfuly</div>");
+	}else{
+		out.print("");
+	}
+ 	%>
  	<div class="row">
  	<div class="col-8">
  	<div style="font-weight: 600!important;"><%=DAODetails.name(id)%> 's post in sdCommunity<br><span style="color: #3498db; font-size: 15px;"><%=PostDAO.selectedUserPost(id)%> Total post</span>
@@ -187,9 +197,9 @@ int id = Integer.parseInt(idString);
 						        <li>
 						        <%
 						        if(statusUserS1 == null){
-						 			out.print("<a class='dropdown-item' href='AdminUserBlockServlet.jsp?id="+p.getUid()+"'>Block</a>");
+						 			out.print("<a class='dropdown-item' href='AdminUserBlockServlet.jsp?id="+p.getPostId()+"&uid="+id+"'>Block</a>");
 						 		}else{
-						 			out.print("<a class='dropdown-item' href='AdminUserUnBlockServlet.jsp?id="+p.getUid()+"'>Unblock</a>");
+						 			out.print("<a class='dropdown-item' href='AdminUserUnBlockServlet.jsp?id="+p.getPostId()+"&uid="+id+"'>Unblock</a>");
 						 		}
 						        %>
 						        </li>
@@ -223,5 +233,16 @@ int id = Integer.parseInt(idString);
  	</div>
  	</div>
 	</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    var alertElement = document.getElementById('alert');
+    if (alertElement) {
+        setTimeout(function() {
+            alertElement.style.display = 'none';
+        }, 2000); // 2000 milliseconds = 2 seconds
+    }
+});
+
+</script>
 </body>
 </html>

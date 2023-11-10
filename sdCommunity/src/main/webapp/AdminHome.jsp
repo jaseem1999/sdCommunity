@@ -185,15 +185,44 @@ if(email == null){
  	</header>
 	<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 	  <div class="offcanvas-header">
-	    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+	    <h5 class="offcanvas-title" id="offcanvasRightLabel">Menu</h5>
 	    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	  </div>
 	  <div class="offcanvas-body">
-	    ...
+	    <ul class="list-group list-group-flush">
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminHome.jsp">User Management</a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminAdvertidement.jsp">Advertisement Agency Management </a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View all posts </a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View all solutions </a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View all comments </a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View Ads</a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View user feedback </a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View Advertisement agency feedback</a></li>
+		</ul>
 	  </div>
 	</div>
 	
 	<div class="container">
+	<%
+	String message = request.getParameter("message");
+	if(message != null && message.equals("BlockSuccess")){
+		out.print("<div class='alert alert-success' id='alert' role='alert'>User blocking sucessfuly</div>");
+	}else if(message != null && message.equals("unBlockSuccess")){
+		out.print("<div class='alert alert-success' id='alert' role='alert'>User unblocking sucessfuly</div>");
+	}else if(message != null && message.equals("userReportAccept")){
+		out.print("<div class='alert alert-success' id='alert' role='alert'>User report accepted sucessfuly</div>");
+	}else if(message != null && message.equals("userReportRejected")){
+		out.print("<div class='alert alert-success' id='alert' role='alert'>User report rejected sucessfuly</div>");
+	}else if(message != null && message.equals("userPostReportAccept")){
+		out.print("<div class='alert alert-success' id='alert' role='alert'>User post report accepted sucessfuly</div>");
+	}else if(message != null && message.equals("userPostReportReject")){
+		out.print("<div class='alert alert-success' id='alert' role='alert'>User post report rejected sucessfuly</div>");
+	}else if(message != null && message.equals("succssSolutionAccept")){
+		out.print("<div class='alert alert-success' id='alert' role='alert'>User solution report accepted sucessfuly</div>");
+	}else if(message != null && message.equals("succssSolutionReject")){
+		out.print("<div class='alert alert-success' id='alert' role='alert'>User solution report rejected sucessfuly</div>");
+	}
+	%>
 	<div class="row" style="margin-top: 50px;">
 		<div class="admin">sdCommunity administrator do not share your login information</div>
 		<hr>
@@ -508,6 +537,14 @@ function openEditModal(userId) {
     document.querySelector('.modal-title').textContent = 'Editing User ID: ' + userId;
     document.querySelector('.id').value = userId;
 }
+document.addEventListener('DOMContentLoaded', function() {
+    var alertElement = document.getElementById('alert');
+    if (alertElement) {
+        setTimeout(function() {
+            alertElement.style.display = 'none';
+        }, 2000); // 2000 milliseconds = 2 seconds
+    }
+});
 
 </script>
 </body>

@@ -130,7 +130,18 @@ int id = Integer.parseInt(stringid);
       </nav>
  	</header>
  	<div class="container" style="margin-top: 50px;">
+ 		
  		<div class="row">
+ 		<%
+		String message = request.getParameter("message");
+		if (message != null && message.equals("BlockSuccess")){
+			out.print("<div class='alert alert-success'id='alert' role='alert'>Comment blocked succesfully</div>");
+		}else if(message != null && message.equals("UnBlockSuccess")){
+			out.print("<div class='alert alert-success' id='alert' role='alert'>Comment unblocked Successfuly</div>");
+		}else{
+			out.print("");
+		}
+		%>
  	<div class="col-8">
  	<div style="font-weight: 600!important;"><%=DAODetails.name(id)%> 's comments in sdCommunity<br><span style="color: #3498db; font-size: 15px;"><%=CommentDAO.selectedTotalComment(id)%> Total comment</span>
 				<span style="color: #27ae60;; font-size: 15px; margin: 20px;"><%=CommentDAO.selectedActiveComment(id)%> Active comment</span>
@@ -214,6 +225,16 @@ int id = Integer.parseInt(stringid);
  	</div>
  </div>
 
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    var alertElement = document.getElementById('alert');
+    if (alertElement) {
+        setTimeout(function() {
+            alertElement.style.display = 'none';
+        }, 2000); // 2000 milliseconds = 2 seconds
+    }
+});
 
+</script>
 </body>
 </html>

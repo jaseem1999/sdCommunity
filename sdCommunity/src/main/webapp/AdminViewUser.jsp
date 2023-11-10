@@ -111,7 +111,7 @@ int id = Integer.parseInt(idString);
         </div>
 
         <div class="nav__link hide">
-          <a href="#">home</a>
+          <a href="AdminHome.jsp">home</a>
           <a href="AdminLoginOut.jsp">Logout</a>
           <a class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
           	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">

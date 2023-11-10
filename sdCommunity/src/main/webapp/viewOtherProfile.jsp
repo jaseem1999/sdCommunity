@@ -218,8 +218,17 @@ a{
 	</div>
 	
 	<div class="container hbdy" style="margin-top: 10px; background: #5f5fd13b;">
+		
 		<img alt="" src="image?id=<%=suid%>" style="width:150px;height:150px ; border-radius: 50%; margin-top: -100px; border: 5px solid white; ">	
 		<div class="row">
+		<%
+		String message = request.getParameter("message");
+		if (message != null && message.equals("reportSuccess")){
+			out.print("<div class='alert alert-success'id='alert' role='alert'>User report succesfully</div>");
+		}else{
+			out.print("");
+		}
+		%>
 		<div class="col">
 		<%
 		Conn con= new Conn();
@@ -486,6 +495,16 @@ a{
 	    window.getSelection().removeAllRanges();
 	    alert("Code copied to clipboard");
 	}
+	
+	document.addEventListener('DOMContentLoaded', function() {
+	    var alertElement = document.getElementById('alert');
+	    if (alertElement) {
+	        setTimeout(function() {
+	            alertElement.style.display = 'none';
+	        }, 2000); // 2000 milliseconds = 2 seconds
+	    }
+	});
+
 	
 	</script>
 

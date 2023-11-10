@@ -249,7 +249,7 @@ a {
  </tr>
  <%
  	response.setContentType("text/html");
- 	List<ProductDTO> rp= ReqProduct.allReqProduct();
+ 	List<ProductDTO> rp= ReqProduct.allReqProduct(id);
  	for(ProductDTO pr1 : rp ){
  %>
 

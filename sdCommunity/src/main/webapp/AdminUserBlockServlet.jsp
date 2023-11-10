@@ -10,12 +10,14 @@
 <body>
 <%
 String stringId = request.getParameter("id");
+String stringUId = request.getParameter("uid");
 int Id = Integer.parseInt(stringId);
+int uId = Integer.parseInt(stringUId);
 int i = PostDAO.blockPost(Id);
 if(i > 0){
-	response.sendRedirect("AdminPostView.jsp?id="+Id+"&message=success");
+	response.sendRedirect("AdminPostView.jsp?id="+uId+"&message=success");
 }else{
-	response.sendRedirect("AdminPostView.jsp?id="+Id+"&message=failed");
+	response.sendRedirect("AdminPostView.jsp?id="+uId+"&message=failed");
 }
 
 %>

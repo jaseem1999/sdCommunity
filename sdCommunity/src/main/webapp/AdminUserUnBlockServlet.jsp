@@ -10,12 +10,14 @@
 <body>
 <%
 String stringId = request.getParameter("id");
+String stringUId = request.getParameter("uid");
 int Id = Integer.parseInt(stringId);
+int uId = Integer.parseInt(stringUId);
 int i = PostDAO.unBlockPost(Id);
 if(i > 0){
-	response.sendRedirect("AdminPostView.jsp?id="+Id+"&message=successBlocked");
+	response.sendRedirect("AdminPostView.jsp?id="+uId+"&message=successBlocked");
 }else{
-	response.sendRedirect("AdminPostView.jsp?id="+Id+"&message=failedBlocked");
+	response.sendRedirect("AdminPostView.jsp?id="+uId+"&message=failedBlocked");
 }
 %>
 </body>

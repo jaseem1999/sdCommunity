@@ -11,12 +11,12 @@ import sdCommunity.conn.Conn;
 
 public class ReqProduct {
 	
-	public static List<ProductDTO> allReqProduct() {
+	public static List<ProductDTO> allReqProduct(int id) {
 		Conn con = new Conn();
 		Connection connection = con.connection;
 		ArrayList<ProductDTO> li = new ArrayList<ProductDTO>();
 		try {
-			String sql = "SELECT id, uid, pName, pDescription, company, price, offer FROM req_products;";
+			String sql = "SELECT id, uid, pName, pDescription, company, price, offer FROM req_products where uid="+id+";";
 			PreparedStatement stm = connection.prepareStatement(sql);
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {

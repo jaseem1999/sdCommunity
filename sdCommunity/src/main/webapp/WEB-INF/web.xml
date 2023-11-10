@@ -245,6 +245,23 @@
     <servlet-name>up</servlet-name>
     <url-pattern>/upe</url-pattern>
 </servlet-mapping>
+<servlet>
+    <servlet-name>upAdv</servlet-name>
+    <servlet-class>sdCommunity.admin.adv.AdvUpdateServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>upAdv</servlet-name>
+    <url-pattern>/upAd</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>adImage</servlet-name>
+    <servlet-class>sdCommunity.admin.adv.ProductImageServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>adImage</servlet-name>
+    <url-pattern>/adim</url-pattern>
+</servlet-mapping>
 
 
   

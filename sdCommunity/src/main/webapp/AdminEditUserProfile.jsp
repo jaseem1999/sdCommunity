@@ -111,7 +111,7 @@ int id = Integer.parseInt(idString);
         </div>
 
         <div class="nav__link hide">
-          <a href="#">home</a>
+          <a href="AdminHome.jsp">home</a>
           <a href="AdminLoginOut.jsp">Logout</a>
           <a class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
           	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
@@ -134,9 +134,9 @@ int id = Integer.parseInt(idString);
 		<%
 		String message = request.getParameter("message");
 		if (message != null && message.equals("success")){
-			out.print("<div class='alert alert-success' role='alert'>Profile updated succesfully</div>");
+			out.print("<div class='alert alert-success'id='alert' role='alert'>Profile updated succesfully</div>");
 		}else if(message != null && message.equals("failed")){
-			out.print("<div class='alert alert-danger' role='alert'>Profile updated Failed</div>");
+			out.print("<div class='alert alert-danger' id='alert' role='alert'>Profile updated Failed</div>");
 		}else{
 			out.print("");
 		}
@@ -224,6 +224,16 @@ int id = Integer.parseInt(idString);
 		</div>
 		
 	</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    var alertElement = document.getElementById('alert');
+    if (alertElement) {
+        setTimeout(function() {
+            alertElement.style.display = 'none';
+        }, 2000); // 2000 milliseconds = 2 seconds
+    }
+});
 
+</script>
 </body>
 </html>
