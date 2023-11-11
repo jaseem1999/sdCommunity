@@ -129,10 +129,10 @@ a {
 
         <div class="nav__link hide">
           <a href="#">home</a>
-          <a href="#">Ads</a>
-          <a href="#">Report</a>
-          <a href="#">contact</a>
-          <a href="#">Logout</a>
+          <a href="AdvCurruntAds.jsp">Ads</a>
+         	<a href="AdReport.jsp">Report</a>
+          <a href="AdvContact.jsp">contact</a>
+          <a href="AdvLogout.jsp">Logout</a>
         </div>
       </nav>
  </header>
@@ -159,8 +159,8 @@ a {
       </button>
       <ul class="dropdown-menu" style="min-width: 340px;">
         <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Ads Upload</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item" href="AdvCurruntAds.jsp"> Current Ads</a></li>
+        <li><a class="dropdown-item" href="AdReport.jsp">Ads Report</a></li>
       </ul>
     </div>
     <div style="margin: 10px;">
@@ -185,11 +185,12 @@ a {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Upload your Ada</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Upload your Ad</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       		<div id="center">
+      		<h4 style="color:red; margin-bottom: 10px;">For 20 minutes 300rs</h4>
 			 <img class="profileImg" alt="" src="" id="updatedImg" style="width: 200px;"/><br>
 		    </div>
 			<form onsubmit="return validateForm()" action="adsAdd" method="post" enctype="multipart/form-data" >
@@ -220,7 +221,13 @@ a {
 			  </div>
 			  <div class="mb-3">
 			    <label for="exampleInputOffer" class="form-label">Offer <span style="color: green">(optional)</span></label>
-			    <input type="text" class="form-control" id="exampleInputOffer" name="poffer">
+			    <input type="text" class="form-control" value="0" id="exampleInputOffer" name="poffer">
+	
+			  </div>
+			  <div class="mb-3">
+			    <label for="exampleInputlink" class="form-label">Product link</label>
+			    <input type="text" class="form-control" id="exampleInputlink" name="plink">
+			    <span class="error" id="linkError" style="color: red;"></span><br>
 			  </div>
 			  <button type="submit" class="btn btn-primary">Submit</button>
 			</form>
@@ -237,6 +244,7 @@ a {
 
 
 <h4 style="margin-top: 50px;">Ads Requested</h4>
+<hr>
 <table class="table table-striped">
  <tr>
  	<th>Product</th>
@@ -245,6 +253,7 @@ a {
  	<th>Description</th>
  	<th>price</th>
  	<th>Offer</th>
+ 	<th>Link</th>
  	<th>Status</th>
  </tr>
  <%
@@ -260,7 +269,25 @@ a {
   	<td><%=pr1.getDesc() %></td>
   	<td><%=pr1.getPrice() %></td>
   	<td><%=pr1.getOffer() %></td>
-  	<td class="table-success">Processing</td>
+  	<td><a style="color: blue;" href="<%
+  	
+  	if(pr1.getLink() != null){
+  		out.print(pr1.getLink());
+  	}else{
+  		out.print("#");
+  	}
+  	%>">Link</a></td>
+  	<td>
+  		<%
+  		if(pr1.getStatus() == null){
+  			out.print("<span style='color: blue'>Proccesing</span>");
+  		}else if(pr1.getStatus().equals("accept")){
+  			out.print("<span style='color: green'>Accepted</span>");
+  		}else{
+  			out.print("<span style='color: red'>Rejected</span>");	
+  		}
+  		%>
+  	</td>
   </tr>
 
  <% } %>
@@ -299,9 +326,16 @@ function validateForm() {
     var pdesc = document.getElementById('exampleInputDescription');
     var pcompany = document.getElementById('exampleInputCompany');
     var pprice = document.getElementById('exampleInputPrice');
+    var plink = document.getElementById('exampleInputlink');
     var status = true;
 
     // Basic validation: Check if fields are not empty
+    if(plink.value.trim() == ''){
+    	document.getElementById("linkError").innerHTML = "Please past URL of product";
+    	return false;
+    }else{
+    	document.getElementById("linkError").innerHTML = "";
+    }
     if(image.value.trim() == ''){
     	document.getElementById("imgError").innerHTML = "Please update image 55kb";
     	return false;

@@ -1,3 +1,5 @@
+<%@page import="sdCommunity.admin.adv.ProductDAO"%>
+<%@page import="sdCommunity.admin.adv.ReqProductDTO"%>
 <%@page import="sdCommunity.user.post.DAOPost"%>
 <%@page import="sdCommunity.user.post.DTOpost"%>
 <%@page import="java.util.List"%>
@@ -83,6 +85,38 @@
     border-radius: 10px;
     border: 3px solid blue;
 }
+.pName{
+		text-align: center;
+    	font-size: 18px;
+    	font-weight: 900;
+    	color: cyan;
+    	margin: 10px;
+	}
+	.cName{
+		position: relative;
+    	font-size: 15px;
+    	margin-right: 30px;
+    	left: 70%;
+    	top: -14px;
+    	color: #6c757d;
+    	font-style: italic;
+	}
+	.priceName{
+		position: relative;
+    	font-size: 30px;
+    	margin-right: 30px;
+    	left: 0%;
+    	color: #4cc600;
+    	margin-top: -30px;
+	}
+	.oName{
+		position: relative;
+	    font-size: 25px;
+	    margin-right: 30px;
+	    left: 0%;
+	    color: #ff1616;
+	    margin-top: -15px;
+	}
 </style>
 </head>
 <body style="background-color: black">
@@ -214,6 +248,12 @@
 			}if(message != null && message.equals("Success")){
 				out.print("<div class='alert alert-success' id='alert' role='alert'>Post added</div>");	
 			}
+			if(message != null && message.equals("successFeedBack")){
+				out.print("<div class='alert alert-success' id='alert' role='alert'>Feedback submitted succssfuly</div>");	
+			}
+			if(message != null && message.equals("failedFeedBack")){
+				out.print("<div class='alert alert-danger' id='alert' role='alert'>Feedback submitted failed</div>");	
+			}
 	%>
 		  <div class="row">
 			    
@@ -255,15 +295,65 @@
 					<hr style="color: white; border: 3px solid;">
 					 <%} %>
 			    </div>
-			    <div class="col-3" style="background-color: #d8d8cd3d ;">
+			    <div class="col-3" style="background-color: #d8d8cd3d color: white;">
 			    	
-			      	
+			    	<div style="position: fixed;" id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+					  <h6 style="color: white;">Ads</h6>
+					  <div class="carousel-inner" id="adsBox">
+					    
+					    <%
+					    List<ReqProductDTO> pr = ProductDAO.getAllAcceptProduct();
+					    for(int i = 0; i < pr.size(); i++){
+					    	ReqProductDTO product = pr.get(i);
+					    %>
+					    
+					    <div class="carousel-item <%= i == 0 ? "active" : "" %>" id="adsBox">
+						    <img class="d-block w-100" src="adim?id=<%=product.getTid()%>" alt="Third slide">
+						    <p style="" class="pName"><%=product.getpName() %></p>
+						    <p class="cName"><%=product.getCompany() %></p>
+						    <p class="priceName">
+						        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
+						            class="bi bi-tags-fill" viewBox="0 0 16 16">
+						            <path
+						                d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+						            <path
+						                d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
+						        </svg>
+						        <%=product.getPrice() %></p>
+						    <p class="oName"><%=product.getPrice()- product.getOffer() %> offer price</p>
+						    <div style="text-align: center;">
+						        <a href="ViewAds.jsp?id=<%=product.getTid()%>&link=<%=product.getLink()%>" class="btn btn-success">goto</a>
+						    </div>
+						    
+						</div>
+					    <%} %>
+					    
+							
+					  </div>
+					       <div style="margin-top: 10px;">
+								<form action="userFeedbacksend.jsp" method="get">
+									<input type="hidden" value="<%=id %>" name="uid"/>
+								  <div class="form-group">
+								    <label style="margin-left: 10px; color: white;" for="exampleInputFeedback">Feedback</label>
+								    <input style="margin: 10px; width: 300px;" type="text" class="form-control" id="exampleInputFeedback" aria-describedby="exampleInputFeedback" placeholder="Enter Feedback" name="feedback">
+								   </div>
+								
+								  <button style="margin-left: 10px;" type="submit" class="btn btn-primary">Submit</button>
+								</form>
+							</div>
+					
+			    	
+			      	</div>
 			    </div>
+			    
 			   
 			    
 			    
 		  </div>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript">
 	

@@ -9,6 +9,14 @@ public class ReqProductDTO {
 	private double price;
 	private double offer;
 	private String status;
+	private String link;
+	
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
 	public String getStatus() {
 		return status;
 	}

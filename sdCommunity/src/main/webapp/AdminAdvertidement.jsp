@@ -181,12 +181,8 @@ if(email == null){
 	    <ul class="list-group list-group-flush">
 		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminHome.jsp">User Management</a></li>
 		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminAdvertidement.jsp">Advertisement Agency Management </a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View all posts </a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View all solutions </a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View all comments </a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View Ads</a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View user feedback </a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View Advertisement agency feedback</a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminViewUserFeedback.jsp">View user feedback </a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminViewAdvFeedback.jsp">View Advertisement agency feedback</a></li>
 		</ul>
 	  </div>
 	</div>
@@ -294,6 +290,7 @@ if(email == null){
 					 	<th>Company</th>
 					 	<th>Price</th>
 					 	<th>Offer</th>
+					 	<th>Link</th>
 					 	<th>Status</th>
 					 	<th>Menu</th>
 					 </tr>
@@ -311,6 +308,15 @@ if(email == null){
 					 	<td><%=rp.getCompany() %></td>
 					 	<td><%=rp.getPrice() %></td>
 					 	<td><%=rp.getOffer() %></td>
+					 	<td>
+					 	<a style="color: blue;" href="<%
+						  	if(rp.getLink() != null){
+						  		out.print(rp.getLink());
+						  	}else{
+						  		out.print("#");
+						  	}
+						  	%>">Link</a>
+					 	</td>
 					 	<td>
 					 	<%
 					 		if(rp.getStatus() == null){
@@ -332,7 +338,7 @@ if(email == null){
 							</button>
 							<ul class="dropdown-menu" style="min-width: 340px;">
 						        <li><a class="dropdown-item" href="AcceptProduct.jsp?productId=<%=rp.getTid()%>">Accept <%=rp.getTid() %></a></li>
-						        <li><a class="dropdown-item" href="">Reject</a></li>
+						        <li><a class="dropdown-item" href="RejectProduct.jsp?productId=<%=rp.getTid()%>">Reject</a></li>
 						      </ul>
 					 	</td>
 					 </tr>
@@ -356,6 +362,7 @@ if(email == null){
 					 	<th>Company</th>
 					 	<th>Price</th>
 					 	<th>Offer</th>
+					 	<th>Link</th>
 					 </tr>
 					 <%
 					 List<ReqProductDTO> ps = ProductDAO.getAllAcceptProduct();
@@ -370,6 +377,15 @@ if(email == null){
 					 		<td><%=p.getCompany() %></td>
 					 		<td><%=p.getPrice() %></td>
 					 		<td><%=p.getOffer() %></td>
+					 		<td>
+					 		<a style="color: blue;" href="<%
+						  	if(p.getLink() != null){
+						  		out.print(p.getLink());
+						  	}else{
+						  		out.print("#");
+						  	}
+						  	%>">Link</a>
+					 		</td>
 					 	</tr>
 					 <%} %>
 					</table>

@@ -16,7 +16,7 @@ public class ReqProduct {
 		Connection connection = con.connection;
 		ArrayList<ProductDTO> li = new ArrayList<ProductDTO>();
 		try {
-			String sql = "SELECT id, uid, pName, pDescription, company, price, offer FROM req_products where uid="+id+";";
+			String sql = "SELECT id, uid, pName, pDescription, company, price, offer,link ,status FROM req_products where uid="+id+";";
 			PreparedStatement stm = connection.prepareStatement(sql);
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
@@ -28,6 +28,9 @@ public class ReqProduct {
 			    pd.setCompany(rs.getString(5));
 			    pd.setPrice(rs.getDouble(6));
 			    pd.setOffer(rs.getDouble(7));
+			    pd.setLink(rs.getString(8));
+			    pd.setStatus(rs.getString(9));
+			    
 			    li.add(pd);	
 			}
 		} catch (Exception e) {

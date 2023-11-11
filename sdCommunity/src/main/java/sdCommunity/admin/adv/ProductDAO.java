@@ -17,7 +17,7 @@ public class ProductDAO {
 		Conn con = new Conn();
 		Connection connection = con.connection;
 		try {
-			String sql = "select id,uid,pName,pDescription,company,price,offer,status from req_products;";
+			String sql = "select id,uid,pName,pDescription,company,price,offer,link,status from req_products;";
 			PreparedStatement stm =connection.prepareStatement(sql);
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()) {
@@ -29,7 +29,8 @@ public class ProductDAO {
 				rp.setCompany(rs.getString(5));
 				rp.setPrice(rs.getDouble(6));
 				rp.setOffer(rs.getDouble(7));
-				rp.setStatus(rs.getString(8));
+				rp.setLink(rs.getString(8));
+				rp.setStatus(rs.getString(9));
 				li.add(rp);
 			}
 		}catch (Exception e) {
@@ -67,7 +68,7 @@ public class ProductDAO {
 			// TODO: handle exception
 			System.out.println(e);
 		}
-		String sql = "select uid,image,pName,pDescription,company,price,offer from req_products where id="+id+";";
+		String sql = "select uid,image,pName,pDescription,company,price,offer,link from req_products where id="+id+";";
 		try {
 			PreparedStatement stm =connection.prepareStatement(sql);
 			ResultSet rs=stm.executeQuery();
@@ -79,8 +80,9 @@ public class ProductDAO {
                 String company = rs.getString("company");
                 double price = rs.getDouble("price");
                 double offer = rs.getDouble("offer");
+                String link = rs.getString("link");
                 if(pName != null) {
-                	String insertProduct ="insert into products(uid,image,pName,pDescription,company,price,offer)value(?, ?, ?, ?, ?, ?, ?)";
+                	String insertProduct ="insert into products(uid,image,pName,pDescription,company,price,offer,link)value(?, ?, ?, ?, ?, ?, ?, ?)";
                 	try {
                 		PreparedStatement statement =connection.prepareStatement(insertProduct);
                 		statement.setInt(1, uid);
@@ -90,6 +92,7 @@ public class ProductDAO {
                 		statement.setString(5, company);
                 		statement.setDouble(6, price);
                 		statement.setDouble(7, offer);
+                		statement.setString(8, link);
                 		rowInserted = statement.executeUpdate();
                 		
                 		
@@ -112,7 +115,7 @@ public class ProductDAO {
 		Conn con = new Conn();
 		Connection connection = con.connection;
 		try {
-			String sql = "select id,uid,pName,pDescription,company,price,offer,status from products;";
+			String sql = "select id,uid,pName,pDescription,company,price,offer,link,status from products order by counts desc;";
 			PreparedStatement stm =connection.prepareStatement(sql);
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()) {
@@ -124,7 +127,8 @@ public class ProductDAO {
 				rp.setCompany(rs.getString(5));
 				rp.setPrice(rs.getDouble(6));
 				rp.setOffer(rs.getDouble(7));
-				rp.setStatus(rs.getString(8));
+				rp.setLink(rs.getString(8));
+				rp.setStatus(rs.getString(9));
 				li.add(rp);
 			}
 		}catch (Exception e) {
@@ -132,5 +136,50 @@ public class ProductDAO {
 			System.out.println(e);
 		}
 		return li;
+	}
+	public static int adsAnalysis(int id) {
+		int updated = 0;
+		Conn conn = new Conn();
+		Connection connection = conn.connection;
+		try {
+			String sql = "SELECT counts FROM products WHERE id=?";
+			PreparedStatement stm = connection.prepareStatement(sql);
+			stm.setInt(1, id);
+			ResultSet rs = stm.executeQuery();
+
+			int count = 0;
+
+			if (rs.next()) {
+			    // Move the cursor to the first row
+			    count = rs.getInt("counts");
+			    count = count + 1;
+			    
+			    // Update the counts in the database
+			    String sqlUpdate = "UPDATE products SET counts=? WHERE id=?";
+			    PreparedStatement updateStm = connection.prepareStatement(sqlUpdate);
+			    updateStm.setInt(1, count);
+			    updateStm.setInt(2, id);
+			    updated = updateStm.executeUpdate();
+			}
+	        return updated;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
+		return updated;
+	}
+	public static int rejectProduct(int id) {
+		Conn conn = new Conn();
+		int rowInserted = 0;
+		Connection connection = conn.connection;
+		try {
+			String sqlUpdate ="update req_products set status='reject' where id="+id+";";
+			Statement statements = connection.createStatement();
+	        rowInserted=statements.executeUpdate(sqlUpdate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
+		return rowInserted;
 	}
 }

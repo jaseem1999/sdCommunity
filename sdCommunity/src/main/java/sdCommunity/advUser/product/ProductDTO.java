@@ -8,6 +8,20 @@ public class ProductDTO {
 	private String company;
 	private double price;
 	private double offer;
+	private String status;
+	private String link;
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public int getPid() {
 		return pid;
 	}

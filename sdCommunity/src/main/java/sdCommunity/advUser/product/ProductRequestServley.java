@@ -58,6 +58,7 @@ public class ProductRequestServley extends HttpServlet {
 		String priceString = request.getParameter("price");
 		double price = Double.parseDouble(priceString);
 		String offerString = request.getParameter("poffer");
+		String link = request.getParameter("plink");
 		double offer = Double.parseDouble(offerString);
 		Part part = request.getPart("image");
 		InputStream is = part.getInputStream();
@@ -69,7 +70,7 @@ public class ProductRequestServley extends HttpServlet {
 		System.out.println("Price: " + price);
 		System.out.println("Offer: " + offer);
 		try {
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO req_products (uid, image, pName, pDescription, company, price, offer) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO req_products (uid, image, pName, pDescription, company, price, offer, link) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setInt(1, uid);
             pstmt.setBlob(2, is);
             pstmt.setString(3, pname);
@@ -77,6 +78,7 @@ public class ProductRequestServley extends HttpServlet {
             pstmt.setString(5, company);
             pstmt.setDouble(6, price);
             pstmt.setDouble(7, offer);
+            pstmt.setString(8, link);
 
             int rowsAffected = pstmt.executeUpdate();
 

@@ -1,3 +1,5 @@
+<%@page import="sdCommunity.user.feedback.UserFeedbackDAO"%>
+<%@page import="sdCommunity.user.feedback.UserfeedbackDTO"%>
 <%@page import="sdCommunity.admin.user.SolutionDAO"%>
 <%@page import="sdCommunity.admin.user.SolutionReportDTO"%>
 <%@page import="sdCommunity.user.details.DAODetails"%>
@@ -130,6 +132,12 @@ if(email == null){
     	overflow-x: hidden;
     	overflow-y: auto;
 	}
+	.scroll4 {
+	     width: 100%;
+   		 height: 400px;
+    	overflow-x: hidden;
+    	overflow-y: auto;
+	}
 
 
   .active {
@@ -192,12 +200,8 @@ if(email == null){
 	    <ul class="list-group list-group-flush">
 		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminHome.jsp">User Management</a></li>
 		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminAdvertidement.jsp">Advertisement Agency Management </a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View all posts </a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View all solutions </a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View all comments </a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View Ads</a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View user feedback </a></li>
-		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="#">View Advertisement agency feedback</a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminViewUserFeedback.jsp">View user feedback </a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminViewAdvFeedback.jsp">View Advertisement agency feedback</a></li>
 		</ul>
 	  </div>
 	</div>
@@ -476,7 +480,7 @@ if(email == null){
 		<div class="col">
 		
 		
-		<div style="font-weight: 600!important;">Users Report others solution (pending work) <br><span style="color: #3498db; font-size: 15px;"><%=SolutionDAO.selectedReportActiveSolution()%> Pending reports </span><br>
+		<div style="font-weight: 600!important;">Users Report others solution <br><span style="color: #3498db; font-size: 15px;"><%=SolutionDAO.selectedReportActiveSolution()%> Pending reports </span><br>
 				<span style="color: #27ae60;; font-size: 15px;"><%=SolutionDAO.selectedReportAcceptSolution()%> Accepted</span><br>
 				<span style="color: #e74c3c; font-size: 15px;"><%=SolutionDAO.selectedReportRejectSolution()%> Rejected</span><br>
 			<hr></div>
@@ -514,12 +518,22 @@ if(email == null){
 		
 		</div>
 		<div class="col">
-		
-		<div style="margin-left: 30px;" id="center">
-			<div class="pie-chart-container" >
-		    <div class="label"><%=UserDAO.totalUser()%></div>
-		  </div>
-		 </div>	
+			<div style="font-weight: 600!important;">Users ReedBack<hr></div>
+			<div class="scroll4" style="border: 1px solid gray; border-radius: 10px;">
+				<table class="table table-striped" style="margin: 2px;">
+					<%
+					List<UserfeedbackDTO> fds = UserFeedbackDAO.getUserFeddback();
+					for(UserfeedbackDTO fd: fds){
+					%>
+					<tr>
+						<td><img src="image?id=<%=fd.getUid()%>" alt="profile" width="40px" style="border: 2px solid #0355f6; border-radius: 50%;"></td>
+						<td>( <%=DAODetails.name(fd.getUid())%> ) feedback id = <%=fd.getTid() %><br>feedback :: <%=fd.getFeedback() %></td>
+						
+					</tr>
+					
+					<%} %>
+				</table>
+			</div>
 		
 		
 		</div>
