@@ -202,9 +202,33 @@ if(email == null){
 		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminAdvertidement.jsp">Advertisement Agency Management </a></li>
 		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminViewUserFeedback.jsp">View user feedback </a></li>
 		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" href="AdminViewAdvFeedback.jsp">View Advertisement agency feedback</a></li>
+		  <li class="list-group-item"><a style="color: #7a7a7a;" class="link-offset-2 link-underline link-underline-opacity-0" data-bs-toggle="modal" data-bs-target="#exampleModal">Add broadcast notification</a></li>
 		</ul>
 	  </div>
 	</div>
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add broadcast notification</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+			 <form action="brodcastNotif.jsp" method="get">
+			  <div class="mb-3">
+			    <label for="exampleInputPassword1" class="form-label">Notification</label>
+			    <input type="text" name="notif" class="form-control" id="exampleInputText">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
 	
 	<div class="container">
 	<%
@@ -225,6 +249,8 @@ if(email == null){
 		out.print("<div class='alert alert-success' id='alert' role='alert'>User solution report accepted sucessfuly</div>");
 	}else if(message != null && message.equals("succssSolutionReject")){
 		out.print("<div class='alert alert-success' id='alert' role='alert'>User solution report rejected sucessfuly</div>");
+	}else if(message != null && message.equals("notifSuccess")){
+		out.print("<div class='alert alert-success' id='alert' role='alert'>Brodcast Notification added sucessfuly</div>");
 	}
 	%>
 	<div class="row" style="margin-top: 50px;">
@@ -518,7 +544,7 @@ if(email == null){
 		
 		</div>
 		<div class="col">
-			<div style="font-weight: 600!important;">Users ReedBack<hr></div>
+			<div style="font-weight: 600!important;">Users FeedBack<hr></div>
 			<div class="scroll4" style="border: 1px solid gray; border-radius: 10px;">
 				<table class="table table-striped" style="margin: 2px;">
 					<%

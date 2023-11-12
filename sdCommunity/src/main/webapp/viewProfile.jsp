@@ -1,3 +1,5 @@
+<%@page import="sdCommunity.admin.user.BroadcastNotf"%>
+<%@page import="sdCommunity.admin.user.BrodcastNotifDTO"%>
 <%@page import="sdCommunity.user.post.DTOpost"%>
 <%@page import="sdCommunity.user.post.DAOPost"%>
 <%@page import="java.util.List"%>
@@ -354,6 +356,19 @@ a{
 						out.print("<br><hr>");	
 					}
 				%>
+				<%
+				List<BrodcastNotifDTO> bds = BroadcastNotf.getNotif();
+				for(BrodcastNotifDTO bd : bds){
+				%>
+				<ul class="list-group list-group-flush" style="background: transparent;">
+					  <li class="list-group-item" style="background: transparent; color: lime;">Notifications</li>
+					  
+					  <li class="list-group-item" style="background: transparent; color: red;"><%=bd.getNotif()%></li>
+					  
+				</ul>
+				
+				<%} %>
+				
     		</div>
     		<div class="col-md-8" >
     		<%

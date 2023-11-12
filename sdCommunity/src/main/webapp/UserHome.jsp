@@ -128,12 +128,7 @@
 			<li class="nav-item"  style="padding: 10px;">
 		    	sdCommunity
 			</li>
-			<li class="nav-item">
-			<div class="" style="color: white; max-width: 100%; margin-left: 20px; margin-top: 5px;" id="showPost">
-				<input type="text" class="search" id="searchInput" placeholder="Enter search query">
-				<button class="btn btn-primary"	 onclick="search()" style="margin-top: -5px;">Search</button>
-			</div>
-			</li>
+			
 			
 			
 			<li class="nav-item">
