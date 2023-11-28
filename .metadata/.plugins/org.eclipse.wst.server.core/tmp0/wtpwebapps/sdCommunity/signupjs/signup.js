@@ -9,6 +9,10 @@
     let rpass = document.getElementById("exampleInputRepassword1").value;
     let num = document.getElementById("exampleInputNumber").value;
     let status = true;
+    
+    function isValidPhoneNumber(num) {
+        return /^\d{10}$/.test(num);
+    }
 
    if (user.match(/^[0-9]+$/)) {
         document.getElementById("usn").innerHTML = "Please enter valid name, don't use numbers";
@@ -23,6 +27,13 @@
     } else {
         document.getElementById("eml").innerHTML = ""; // Clear error message
     }
+    if (isValidPhoneNumber(num)) {
+    	document.getElementById("nos").innerHTML = "valid number";
+    } else {
+    	document.getElementById("noe").innerHTML = "Please enter valid number";
+    	status = false;
+    }
+    
 
     if (pass !== rpass) {
         document.getElementById("psw").innerHTML = "Passwords do not match";

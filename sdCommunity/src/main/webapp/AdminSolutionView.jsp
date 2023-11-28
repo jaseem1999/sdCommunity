@@ -166,7 +166,7 @@ int id = Integer.parseInt(stringid);
 					<td><%=ps.getSid() %></td>
 					<td><%=ps.getPid() %></td>
 					<td><%=ps.getUid() %></td>
-					<td><pre><%=ps.getCode() %></pre></td>
+					<td><xmp><%=ps.getCode() %></xmp></td>
 					<td>
 						<%
 						

@@ -275,6 +275,7 @@ function validation() {
     	document.getElementById("nos").innerHTML = "valid number";
     } else {
     	document.getElementById("noe").innerHTML = "Please enter valid number";
+    	status = false;
     }
     if (pass !== rpass) {
         document.getElementById("psw").innerHTML = "Passwords do not match";

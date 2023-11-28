@@ -114,7 +114,7 @@ if(email == null){
 		border: 2px solid black;
 	}
 	.scroll {
-		  width: 100%;
+		  width: 93%;
 		  height: 300px;
 		  overflow-x: hidden;
 		  overflow-y: auto;
@@ -423,7 +423,7 @@ if(email == null){
 			
 		
 		</div>
-	   <div class="col-3">
+	   <div class="col-10">
 	   		<div style="font-weight: 600!important;">Users Report other users <br><span style="color: #3498db; font-size: 15px;"><%=UserDAO.totalReportOtherUser()%> Pending reports </span><br>
 				<span style="color: #27ae60;; font-size: 15px;"><%=UserDAO.totalReportAcceptOtherUser()%> Accepted</span><br>
 				<span style="color: #e74c3c; font-size: 15px;"><%=UserDAO.totalReportRejectOtherUser()%> Rejected</span><br>

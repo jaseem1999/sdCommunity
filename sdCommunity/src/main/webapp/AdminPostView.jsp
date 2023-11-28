@@ -174,7 +174,7 @@ int id = Integer.parseInt(idString);
  	<td><img alt="" src="poimg?id=<%=p.getPostId()%>" width="150px"></td>
  	<td><%=p.getHeading() %></td>
  	<td><%=p.getPost() %></td>
- 	<td><%=p.getCode() %></td>
+ 	<td><xmp><%=p.getCode() %></xmp></td>
  	<td><a style="color: blue;" href="<%=p.getLink() %>">Link</a> </td>
  	<td>
  		<%
