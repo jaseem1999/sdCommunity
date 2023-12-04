@@ -139,9 +139,7 @@ a {
         </div>
 
         <div class="nav__link hide">
-          <a href="#">home</a>
-          <a href="#">about</a>
-          <a href="#">contact</a>
+          <a href="index.jsp">home</a>
           <a href="AdvLogin.jsp">Login</a>
         </div>
       </nav>

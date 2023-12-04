@@ -61,6 +61,7 @@ public class ProductDAO {
 		int rowInserted = 0;
 		Connection connection = conn.connection;
 		try {
+			System.out.println(id);
 			String sqlUpdate ="update req_products set status='accept' where id="+id+";";
 			Statement statements = connection.createStatement();
 	        statements.executeUpdate(sqlUpdate);
@@ -181,5 +182,54 @@ public class ProductDAO {
 			System.out.println(e);
 		}
 		return rowInserted;
+	}
+	
+	public static int getAcceptProductCount() {
+		int noUser =0;
+		Conn conn = new Conn();
+		Connection connection = conn.connection;
+		String sql = "select count(status) from req_products where status='accept';";
+		try {
+			PreparedStatement stm =connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+            rs.next();
+            noUser = rs.getInt(1);
+			return noUser;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return noUser;
+	}
+	public static int getRejectProductCount() {
+		int noUser =0;
+		Conn conn = new Conn();
+		Connection connection = conn.connection;
+		String sql = "select count(status) from req_products where status='reject';";
+		try {
+			PreparedStatement stm =connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+            rs.next();
+            noUser = rs.getInt(1);
+			return noUser;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return noUser;
+	}
+	public static int getPendingProductCount() {
+		int noUser =0;
+		Conn conn = new Conn();
+		Connection connection = conn.connection;
+		String sql = "select count(status) from req_products where status is null;";
+		try {
+			PreparedStatement stm =connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+            rs.next();
+            noUser = rs.getInt(1);
+			return noUser;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return noUser;
 	}
 }

@@ -274,9 +274,9 @@ if(email == null){
 		}
 		%>
 		<div class="col" >
-			<div style="font-weight: 600!important;">Requested Ads of sdCommunity<br><span style="color: #3498db; font-size: 15px;"><%=0%> Pending ads requested </span>
-				<span style="color: #27ae60;; font-size: 15px; margin: 20px;"><%=0%> Accepted ads</span>
-				<span style="color: #e74c3c; font-size: 15px; margin: 20px;"><%=0%> Rejected Ads</span> 
+			<div style="font-weight: 600!important;">Requested Ads of sdCommunity<br><span style="color: #3498db; font-size: 15px;"><%=ProductDAO.getPendingProductCount()%> Pending ads requested </span>
+				<span style="color: #27ae60;; font-size: 15px; margin: 20px;"><%=ProductDAO.getAcceptProductCount()%> Accepted ads</span>
+				<span style="color: #e74c3c; font-size: 15px; margin: 20px;"><%=ProductDAO.getRejectProductCount()%> Rejected Ads</span> 
 			<hr></div>
 			<div class="scroll" style="border: 1px solid gray; border-radius: 10px;" >
 				<table class="table table-striped" style="margin: 10px;height: 297px;width: 100%;border: 1px;">
@@ -321,7 +321,7 @@ if(email == null){
 					 	<%
 					 		if(rp.getStatus() == null){
 					 			out.print("<span style='color:#3498db;' >Pending</span>");
-					 		}else if(rp.getStatus().equals("accept")){
+					 		}else if(rp.getStatus().equals("accept" )){
 					 			out.print("<span style='color:#27ae60;' >Accept</span>");
 					 		}else if(rp.getStatus().equals("reject")){
 					 			out.print("<span style='color:#e74c3c;' >Reject</span>");
@@ -337,7 +337,7 @@ if(email == null){
 								</svg>
 							</button>
 							<ul class="dropdown-menu" style="min-width: 340px;">
-						        <li><a class="dropdown-item" href="AcceptProduct.jsp?productId=<%=rp.getTid()%>">Accept <%=rp.getTid() %></a></li>
+						        <li><a class="dropdown-item" href="AcceptProduct.jsp?productId=<%=rp.getTid()%>">Accept</a></li>
 						        <li><a class="dropdown-item" href="RejectProduct.jsp?productId=<%=rp.getTid()%>">Reject</a></li>
 						      </ul>
 					 	</td>
