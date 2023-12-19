@@ -94,8 +94,12 @@ button {
 					    <label for="exampleInputPassword1" class="form-label">Password</label>
 					    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
 					  </div>
+					  <div class="mb-3">
+					    	<p style="margin-left: 20px;"><a href="#" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Forget Password</a></p>
+					  </div>
 					  <button type="submit" class="btn btn-success">Login</button><a class="btn btn-primary" href="signup.jsp">Sign up</a>
 				 </form>
+				 
 			      
 			    </div>
 			    <div class="col">
