@@ -35,4 +35,25 @@ to their unique requirements.
     <li></li>
 </ul>
 
-<img src="./img/Screenshot (37).png" alt="login user page"/>
+<img src="./img/Screenshot (42).png" alt="login user page"/>
+
+<h3>profile page for user</h3>
+<ul>
+    <li></li>
+</ul>
+
+<img src="./img/Screenshot (40).png" alt="login user page"/>
+<h3>Add post</h3>
+<ul>
+    <li></li>
+</ul>
+
+<img src="./img/Screenshot (41).png" alt="login user page"/>
+
+<h3>View post and solution for user</h3>
+<ul>
+    <li></li>
+</ul>
+
+<img src="./img/Screenshot (43).png" alt="login user page"/>
+
