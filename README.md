@@ -13,3 +13,26 @@ developers connect, learn, and innovate in a digital landscape tailored precisel
 to their unique requirements.
 </p>
 
+<h3>Home page of sdCommunity</h3>
+
+<img src="./img/Screenshot (34).png" alt="home page of sdCommunity" />
+
+<h3>Sign up page of user(Developers)</h3>
+<ul>
+    <li></li>
+</ul>
+<img src="./img/Screenshot (35).png" alt="signup user page"/>
+
+<h3>Login page for user</h3>
+<ul>
+    <li></li>
+</ul>
+
+<img src="./img/Screenshot (36).png" alt="login user page"/>
+
+<h3>Home page for user</h3>
+<ul>
+    <li></li>
+</ul>
+
+<img src="./img/Screenshot (37).png" alt="login user page"/>
